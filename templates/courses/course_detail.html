@@ -1,0 +1,1176 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ course.title }} | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/course_detail.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+
+        <!-- LOGO -->
+
+        <a
+            href="{% url 'home' %}"
+            class="logo"
+        >
+            🎓 EduLearn
+        </a>
+
+
+        <!-- NAVIGATION -->
+
+        
+
+            {% if user.is_authenticated %}
+
+                <!-- LOGGED-IN STUDENT -->
+               <div class="nav-links">
+                  <a href="{% url 'dashboard' %}">
+                      Dashboard
+                  </a>
+
+                  <a href="{% url 'profile' %}">
+                      Profile
+                  </a>
+                
+
+                
+                   
+                
+                </div>
+
+            {% else %}
+
+                <!-- LOGGED-OUT USER -->
+                <div class="nav-actions">
+
+                  <a href="{% url 'home' %}">
+                      Home
+                  </a>
+
+                  <a href="{% url 'course_list' %}">
+                      Courses
+                  </a>
+
+                  <a href="{% url 'free_courses' %}">
+                      Free Courses
+                  </a>
+
+                  <a href="{% url 'paid_courses' %}">
+                      Paid Courses
+                  </a>
+
+                  
+                  <a
+                    href="{% url 'login' %}"
+                      class="login-link"
+                  >
+                      Login
+                  </a>
+
+                  <a
+                    href="{% url 'register' %}"
+                      class="register-button"
+                  >
+                      Register
+                  </a>
+
+                </div>  
+                
+            {% endif %}
+
+        
+
+
+        <!-- NAV ACTIONS -->
+
+        <div class="nav-actions">
+
+            {% if user.is_authenticated %}
+
+                <a class="logout-button"
+                     href="{% url 'logout' %}">
+                          Logout
+                </a>
+
+            {% else %}
+
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     COURSE HERO
+===================================================== -->
+
+<section class="detail-hero">
+
+    <div class="detail-hero-container">
+
+        <div class="hero-content">
+
+
+            <!-- Category -->
+
+            {% if course.category %}
+
+                <span class="hero-category">
+                    {{ course.category.name }}
+                </span>
+
+            {% endif %}
+
+
+            <!-- Title -->
+
+            <h1>
+                {{ course.title }}
+            </h1>
+
+
+            <!-- Description -->
+
+            <p>
+                {{ course.description }}
+            </p>
+
+
+            <!-- Course meta -->
+
+            <div class="hero-meta">
+
+                <span>
+                    👨‍🏫
+                    {{ course.instructor.username }}
+                </span>
+
+                <span>
+                    🎥
+                    {{ total_lessons }}
+                    Lessons
+                </span>
+
+                {% if course.price == 0 %}
+
+                    <span>
+                        🆓 Free Course
+                    </span>
+
+                {% else %}
+
+                    <span>
+                        💳 Paid Course
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="detail-container">
+
+
+    <!-- =================================================
+         MESSAGES
+    ================================================== -->
+
+    {% if messages %}
+
+        <div class="messages">
+
+            {% for message in messages %}
+
+                <div class="message {{ message.tags }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+
+    <!-- =================================================
+         COURSE LAYOUT
+    ================================================== -->
+
+    <div class="detail-layout">
+
+
+        <!-- =================================================
+             LEFT CONTENT
+        ================================================== -->
+
+        <div class="detail-main">
+
+
+            <!-- =================================================
+                 PROGRESS CARD
+            ================================================== -->
+
+            <section class="progress-card">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            YOUR LEARNING
+                        </span>
+
+                        <h2>
+                            📊 Course Progress
+                        </h2>
+
+                    </div>
+
+                    <div class="progress-number">
+                        {{ progress_percentage }}%
+                    </div>
+
+                </div>
+
+
+                <div class="progress-info">
+
+                    <span>
+                        {{ completed_lessons }}
+                        of
+                        {{ total_lessons }}
+                        lessons completed
+                    </span>
+
+                    <strong>
+                        {{ progress_percentage }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        data-progress="{{ progress_percentage|default:0 }}"
+                    ></div>
+
+                </div>
+
+
+                {% if course_completed %}
+
+                    <div class="completed-message">
+
+                        🎉
+
+                        You have completed all lessons
+                        in this course!
+
+                    </div>
+
+                {% else %}
+
+                    <p class="progress-help">
+                        Continue learning to complete this course.
+                    </p>
+
+                {% endif %}
+
+            </section>
+
+
+
+            <!-- =================================================
+                 COURSE COMPLETION
+            ================================================== -->
+
+            {% if course_completed %}
+
+                <section class="completion-card">
+
+                    <div class="completion-icon">
+                        🏆
+                    </div>
+
+                    <div class="completion-content">
+
+                        <span class="section-label">
+                            COURSE COMPLETED
+                        </span>
+
+                        <h2>
+                            Congratulations!
+                        </h2>
+
+                        <p>
+                            You have successfully completed
+                            this course.
+                        </p>
+
+                        <a
+                            href="{% url 'certificate_view' course.id %}"
+                            class="certificate-button"
+                        >
+                            🏆 View Certificate
+                        </a>
+
+                    </div>
+
+                </section>
+
+            {% endif %}
+
+
+
+            <!-- =================================================
+                 COURSE INFORMATION
+            ================================================== -->
+
+            <section class="info-section">
+
+                <div class="section-title">
+
+                    <span class="section-label">
+                        COURSE DETAILS
+                    </span>
+
+                    <h2>
+                        📚 Course Information
+                    </h2>
+
+                </div>
+
+
+                <div class="info-grid">
+
+
+                    <!-- Category -->
+
+                    <div class="info-box">
+
+                        <div class="info-icon">
+                            📂
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Category
+                            </span>
+
+                            <strong>
+
+                                {% if course.category %}
+
+                                    {{ course.category.name }}
+
+                                {% else %}
+
+                                    General
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Instructor -->
+
+                    <div class="info-box">
+
+                        <div class="info-icon">
+                            👨‍🏫
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Instructor
+                            </span>
+
+                            <strong>
+                                {{ course.instructor.username }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Lessons -->
+
+                    <div class="info-box">
+
+                        <div class="info-icon">
+                            🎥
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Lessons
+                            </span>
+
+                            <strong>
+                                {{ total_lessons }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Price -->
+
+                    <div class="info-box">
+
+                        <div class="info-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Course Price
+                            </span>
+
+                            <strong>
+
+                                {% if course.price == 0 %}
+
+                                    Free
+
+                                {% else %}
+
+                                    ₹{{ course.price }}
+
+                                {% endif %}
+
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================================
+                 LESSONS
+            ================================================== -->
+
+            <section class="lessons-section">
+
+                <div class="section-title">
+
+                    <span class="section-label">
+                        COURSE CONTENT
+                    </span>
+
+                    <h2>
+                        🎥 Course Lessons
+                    </h2>
+
+                    <p>
+                        Follow the lessons in order and
+                        complete your learning journey.
+                    </p>
+
+                </div>
+
+
+                {% if lessons %}
+
+                    <div class="lesson-list">
+
+
+                        {% for lesson in lessons %}
+
+                            <div class="lesson-item">
+
+
+                                <!-- Number -->
+
+                                <div class="lesson-number">
+
+                                    <span>
+                                        {{ lesson.order }}
+                                    </span>
+
+                                </div>
+
+
+
+                                <!-- Lesson information -->
+
+                                <div class="lesson-content">
+
+                                    <h3>
+                                        {{ lesson.title }}
+                                    </h3>
+
+                                    {% if lesson.description %}
+
+                                        <p>
+                                            {{ lesson.description }}
+                                        </p>
+
+                                    {% endif %}
+
+                                </div>
+
+
+
+                                <!-- Action -->
+
+                                <div class="lesson-action">
+
+                                    {% if is_enrolled %}
+
+                                        <a
+                                            href="{% url 'lesson_detail' lesson.id %}"
+                                            class="lesson-button"
+                                        >
+                                            ▶ Watch Lesson
+                                        </a>
+
+                                    {% else %}
+
+                                        <span class="lesson-locked">
+                                            🔒 Enroll to Watch
+                                        </span>
+
+                                    {% endif %}
+
+                                </div>
+
+
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
+
+                {% else %}
+
+                    <div class="empty-lessons">
+
+                        <div>
+                            🎥
+                        </div>
+
+                        <h3>
+                            No Lessons Available Yet
+                        </h3>
+
+                        <p>
+                            The instructor has not added
+                            any lessons to this course yet.
+                        </p>
+
+                    </div>
+
+                {% endif %}
+
+            </section>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT SIDEBAR
+        ================================================== -->
+
+        <aside class="detail-sidebar">
+
+
+            <!-- =================================================
+                 ENROLLMENT CARD
+            ================================================== -->
+
+            <div class="enrollment-card">
+
+
+                {% if is_enrolled %}
+
+
+                    <!-- Already enrolled -->
+
+                    <div class="enrollment-icon enrolled">
+                        ✓
+                    </div>
+
+                    <span class="sidebar-label">
+                        COURSE ACCESS
+                    </span>
+
+                    <h2>
+                        You Are Enrolled
+                    </h2>
+
+                    <p>
+                        You already have access to
+                        all available lessons.
+                    </p>
+
+
+                    <a
+                        href="{% url 'my_courses' %}"
+                        class="primary-button"
+                    >
+                        📚 My Courses
+                    </a>
+
+
+                {% else %}
+
+
+                    {% if course.price > 0 %}
+
+
+                        <!-- Paid course -->
+
+                        <div class="enrollment-icon paid">
+                            💳
+                        </div>
+
+                        <span class="sidebar-label">
+                            PREMIUM COURSE
+                        </span>
+
+                        <h2>
+                            Get Full Access
+                        </h2>
+
+                        <p>
+                            Complete your payment to
+                            unlock all course lessons.
+                        </p>
+
+
+                        <div class="sidebar-price">
+                            ₹{{ course.price }}
+                        </div>
+
+
+                        <a
+                            href="{% url 'create_payment_order' course.id %}"
+                            class="primary-button payment-button"
+                        >
+                            💳 Pay Now
+                        </a>
+
+
+                        <div class="secure-payment">
+                            🔒 Secure payment powered by Razorpay
+                        </div>
+
+
+                    {% else %}
+
+
+                        <!-- Free course -->
+
+                        <div class="enrollment-icon free">
+                            🆓
+                        </div>
+
+                        <span class="sidebar-label">
+                            FREE COURSE
+                        </span>
+
+                        <h2>
+                            Start Learning
+                        </h2>
+
+                        <p>
+                            This course is completely free.
+                            Enroll now and start learning.
+                        </p>
+
+
+                        <div class="sidebar-price free-price">
+                            Free
+                        </div>
+
+
+                       <form
+                           method="POST"
+                           action="{% url 'enroll_course' course.id %}"
+                        >
+                           {% csrf_token %}
+
+                           <button
+                               type="submit"
+                               class="enroll-button"
+                            >
+                                Enroll Now
+                            </button>
+
+                        </form>
+
+
+                    {% endif %}
+
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COURSE STATS
+            ================================================== -->
+
+            <div class="sidebar-stats">
+
+                <h3>
+                    Course Overview
+                </h3>
+
+
+                <div class="stat-row">
+
+                    <span>
+                        🎥 Lessons
+                    </span>
+
+                    <strong>
+                        {{ total_lessons }}
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-row">
+
+                    <span>
+                        📊 Progress
+                    </span>
+
+                    <strong>
+                        {{ progress_percentage }}%
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-row">
+
+                    <span>
+                        👨‍🏫 Instructor
+                    </span>
+
+                    <strong>
+                        {{ course.instructor.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-row">
+
+                    <span>
+                        💰 Price
+                    </span>
+
+                    <strong>
+
+                        {% if course.price == 0 %}
+
+                            Free
+
+                        {% else %}
+
+                            ₹{{ course.price }}
+
+                        {% endif %}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </aside>
+
+    </div>
+
+
+
+    <!-- =================================================
+         BACK TO COURSES
+    ================================================== -->
+
+    <div class="back-section">
+
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'dashboard' %}">
+                ← Back to Dashboard
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'course_list' %}">
+                ← Back to Courses
+            </a>
+
+        {% endif %}
+
+    </div>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="detail-cta">
+
+    <div class="cta-content">
+
+        <span>
+            KEEP LEARNING
+        </span>
+
+        <h2>
+            Build Your Skills With EduLearn
+        </h2>
+
+        <p>
+            Learn practical skills, complete courses,
+            and take the next step toward your goals.
+        </p>
+
+
+        {% if user.is_authenticated %}
+
+            <a
+                href="{% url 'dashboard' %}"
+                class="cta-button"
+            >
+                Go to Dashboard →
+            </a>
+
+        {% else %}
+
+            <a
+                href="{% url 'course_list' %}"
+                class="cta-button"
+            >
+                Explore More Courses →
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+
+        <!-- Brand -->
+
+        <div class="footer-brand">
+
+            <div class="footer-logo">
+                🎓 EduLearn
+            </div>
+
+            <p class="footer-description">
+                Learn practical skills through structured
+                online courses and video lessons.
+            </p>
+
+            <p class="footer-tagline">
+                Learn. Grow. Succeed.
+            </p>
+
+        </div>
+
+
+
+        <!-- Platform -->
+
+        <div class="footer-column">
+
+            <h4>
+                Platform
+            </h4>
+
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    Profile
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- Learning -->
+
+        <div class="footer-column">
+
+            <h4>
+                Learning
+            </h4>
+
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'my_courses' %}">
+                    My Courses
+                </a>
+
+                <a href="{% url 'dashboard' %}">
+                    My Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'course_list' %}">
+                    All Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Learning
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Premium Courses
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+
+        <!-- Account -->
+
+        <div class="footer-column">
+
+            <h4>
+                Account
+            </h4>
+
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    Profile
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    Login
+                </a>
+
+                <a href="{% url 'register' %}">
+                    Register
+                </a>
+
+            {% endif %}
+
+
+            <a href="{% url 'password_reset' %}">
+                Forgot Password
+            </a>
+
+        </div>
+
+
+
+        <!-- Support -->
+
+        <div class="footer-column">
+
+            <h4>
+                Support
+            </h4>
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}">
+                    Help & Learning
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'home' %}">
+                    About EduLearn
+                </a>
+
+                <a href="{% url 'home' %}">
+                    Contact
+                </a>
+
+                <a href="{% url 'home' %}">
+                    FAQ
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Help & Learning
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+        <div class="footer-bottom-content">
+
+            <p>
+                © 2026 EduLearn. All rights reserved.
+            </p>
+
+            <p>
+                Built for learners 🚀
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+    document
+        .querySelectorAll(".progress-fill")
+        .forEach(
+            function (bar) {
+
+                const progress =
+                    bar.dataset.progress || 0;
+
+                bar.style.width =
+                    progress + "%";
+
+            }
+        );
+
+</script>
+
+
+</body>
+
+</html>

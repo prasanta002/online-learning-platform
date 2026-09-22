@@ -1,0 +1,672 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f6f9fc;
+
+    color: #102d4f;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5ebf2;
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 16px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    color: #102d4f;
+
+    text-decoration: none;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.officer-label {
+    color: #718096;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dashboard-link {
+    color: #2f80ed;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dashboard-link:hover {
+    text-decoration: underline;
+}
+
+.logout-link {
+    padding: 8px 13px;
+
+    background: #fff2f2;
+
+    color: #d64545;
+
+    border: 1px solid #ffd9d9;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.logout-link:hover {
+    background: #ffe5e5;
+}
+
+
+/* =========================================
+   PAGE CONTAINER
+========================================= */
+
+.page-container {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 45px 25px 60px;
+}
+
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.page-label {
+    display: inline-block;
+
+    color: #2f80ed;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 7px;
+}
+
+.page-header h1 {
+    color: #102d4f;
+
+    font-size: 30px;
+    font-weight: 800;
+
+    margin-bottom: 7px;
+}
+
+.page-header p {
+    color: #7a8999;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+}
+
+.header-icon {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf5ff;
+
+    border-radius: 14px;
+
+    font-size: 27px;
+}
+
+
+/* =========================================
+   COURSE CARD
+========================================= */
+
+.course-card {
+    background: #ffffff;
+
+    border: 1px solid #e2e9f1;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 10px 35px rgba(16, 45, 79, 0.06);
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.card-header {
+    padding: 25px 30px;
+
+    border-bottom: 1px solid #edf1f5;
+}
+
+.card-header h2 {
+    color: #102d4f;
+
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.card-header p {
+    color: #8996a5;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.course-form {
+    padding: 30px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+
+    color: #253f5a;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    border: 1px solid #d7e0e9;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #102d4f;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+.form-group input,
+.form-group select {
+    height: 46px;
+
+    padding: 0 13px;
+}
+
+.form-group textarea {
+    padding: 13px;
+
+    resize: vertical;
+
+    min-height: 150px;
+
+    line-height: 1.6;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a3afbb;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2f80ed;
+
+    box-shadow:
+        0 0 0 3px rgba(47, 128, 237, 0.10);
+}
+
+.field-help {
+    display: block;
+
+    margin-top: 6px;
+
+    color: #94a0ad;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   PRICE
+========================================= */
+
+.price-input {
+    position: relative;
+}
+
+.price-input .currency {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #60758b;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    pointer-events: none;
+}
+
+.price-input input {
+    padding-left: 34px;
+}
+
+
+/* =========================================
+   PUBLISH CARD
+========================================= */
+
+.publish-card {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    margin-bottom: 28px;
+
+    background: #f8fbff;
+
+    border: 1px solid #dfeaf6;
+
+    border-radius: 10px;
+}
+
+.publish-icon {
+    width: 36px;
+    height: 36px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e8f3ff;
+
+    color: #2f80ed;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.publish-content {
+    flex: 1;
+}
+
+.publish-title {
+    display: block;
+
+    color: #253f5a;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    margin-bottom: 4px;
+}
+
+.publish-content p {
+    color: #8493a2;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   TOGGLE SWITCH
+========================================= */
+
+.switch {
+    position: relative;
+
+    width: 43px;
+    height: 24px;
+
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+
+    inset: 0;
+
+    background: #cbd5df;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #ffffff;
+
+    border-radius: 50%;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+    transition: 0.2s;
+}
+
+.switch input:checked + .slider {
+    background: #2f80ed;
+}
+
+.switch input:checked + .slider::before {
+    transform: translateX(19px);
+}
+
+
+/* =========================================
+   FORM ACTIONS
+========================================= */
+
+.form-actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid #edf1f5;
+}
+
+.cancel-button,
+.create-button {
+    min-height: 43px;
+
+    padding: 0 20px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cancel-button {
+    background: #ffffff;
+
+    color: #667789;
+
+    border: 1px solid #d7e0e9;
+}
+
+.cancel-button:hover {
+    background: #f7f9fb;
+}
+
+.create-button {
+    background: #2f80ed;
+
+    color: #ffffff;
+
+    border: 1px solid #2f80ed;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+.create-button:hover {
+    background: #1769d2;
+
+    transform: translateY(-1px);
+}
+
+.create-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   COURSE TIP
+========================================= */
+
+.course-tip {
+    display: flex;
+
+    gap: 12px;
+
+    margin-top: 20px;
+
+    padding: 16px 18px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3eaf1;
+
+    border-radius: 10px;
+}
+
+.tip-icon {
+    font-size: 18px;
+}
+
+.course-tip strong {
+    display: block;
+
+    color: #304a63;
+
+    font-size: 12px;
+
+    margin-bottom: 3px;
+}
+
+.course-tip p {
+    color: #8794a2;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    padding: 20px;
+
+    border-top: 1px solid #e5ebf2;
+
+    background: #ffffff;
+
+    color: #8996a5;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .navbar-inner {
+        padding: 14px 17px;
+    }
+
+    .nav-right {
+        gap: 9px;
+    }
+
+    .officer-label {
+        display: none;
+    }
+
+    .dashboard-link {
+        font-size: 11px;
+    }
+
+    .logout-link {
+        padding: 7px 10px;
+    }
+
+    .page-container {
+        padding: 30px 15px 45px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .header-icon {
+        width: 50px;
+        height: 50px;
+
+        font-size: 22px;
+    }
+
+    .card-header {
+        padding: 21px 20px;
+    }
+
+    .course-form {
+        padding: 22px 20px;
+    }
+
+    .publish-card {
+        align-items: flex-start;
+    }
+
+    .switch {
+        margin-top: 5px;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+
+        align-items: stretch;
+    }
+
+    .cancel-button,
+    .create-button {
+        width: 100%;
+    }
+
+}

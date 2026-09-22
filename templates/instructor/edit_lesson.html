@@ -1,0 +1,554 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Lesson | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/edit_lesson.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================= -->
+
+    <main class="edit-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <span class="page-label">
+                LESSON MANAGEMENT
+            </span>
+
+            <h1>
+                Edit Lesson
+            </h1>
+
+            <p>
+                Update your lesson information and video details.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             EDIT CARD
+        ========================= -->
+
+        <section class="edit-card">
+
+
+            <!-- CARD HEADER -->
+
+            <div class="card-header">
+
+                <div class="lesson-icon">
+                    🎥
+                </div>
+
+                <div>
+
+                    <h2>
+                        Lesson Information
+                    </h2>
+
+                    <p>
+                        Course:
+                        <strong>
+                            {{ lesson.course.title }}
+                        </strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 FORM
+            ========================= -->
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- =========================
+                     LESSON TITLE
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="lesson-title">
+                        Lesson Title
+                    </label>
+
+                    <input
+                        id="lesson-title"
+                        type="text"
+                        name="title"
+                        value="{{ lesson.title }}"
+                        placeholder="Enter lesson title"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =========================
+                     DESCRIPTION
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="lesson-description">
+                        Lesson Description
+                    </label>
+
+                    <textarea
+                        id="lesson-description"
+                        name="description"
+                        rows="7"
+                        placeholder="Enter lesson description"
+                    >{{ lesson.description }}</textarea>
+
+                </div>
+
+
+                <!-- =========================
+                     VIDEO URL
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="video-url">
+
+                        Video URL
+
+                        <span class="optional-label">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+                    <div class="video-url-box">
+
+                        <span class="video-url-icon">
+                            ▶
+                        </span>
+
+                        <input
+                            id="video-url"
+                            type="url"
+                            name="video_url"
+                            value="{{ lesson.video_url }}"
+                            placeholder="https://www.youtube.com/embed/VIDEO_ID"
+                        >
+
+                    </div>
+
+                    <small class="field-help">
+                        Use this if you want to use a YouTube or external video.
+                    </small>
+
+                </div>
+
+
+                <!-- =========================
+                     CURRENT VIDEO
+                ========================= -->
+
+                {% if lesson.video_file %}
+
+                <div class="current-video-section">
+
+                    <div class="current-video-header">
+
+                        <div>
+
+                            <span class="section-label">
+                                CURRENT VIDEO
+                            </span>
+
+                            <h3>
+                                Uploaded Video
+                            </h3>
+
+                        </div>
+
+                        <span class="current-video-status">
+                            ✓ Uploaded
+                        </span>
+
+                    </div>
+
+
+                    <!-- CURRENT VIDEO PLAYER -->
+
+                    <div class="current-video-player">
+
+                        <video
+                            controls
+                            preload="metadata"
+                            playsinline
+                        >
+
+                            <source
+                                src="{{ lesson.video_file.url }}"
+                            >
+
+                            Your browser does not support
+                            the video player.
+
+                        </video>
+
+                    </div>
+
+
+                    <!-- CURRENT VIDEO DETAILS -->
+
+                    <div class="current-video-info">
+
+                        <div class="current-video-icon">
+                            🎬
+                        </div>
+
+                        <div class="current-video-details">
+
+                            <strong>
+                                Current uploaded video
+                            </strong>
+
+                            <span>
+                                {{ lesson.video_file.name }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+
+                <!-- =========================
+                     UPLOAD NEW VIDEO
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="video-file">
+
+                        {% if lesson.video_file %}
+                            Replace Video
+                        {% else %}
+                            Upload Video
+                        {% endif %}
+
+                        <span class="optional-label">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+
+                    <div class="video-upload-box">
+
+
+                        <!-- ICON -->
+
+                        <div class="upload-icon">
+                            🎬
+                        </div>
+
+
+                        <!-- UPLOAD CONTENT -->
+
+                        <div class="upload-content">
+
+                            <label
+                                for="video-file"
+                                class="upload-button"
+                            >
+                                Choose Video File
+                            </label>
+
+
+                            <input
+                                id="video-file"
+                                type="file"
+                                name="video_file"
+                                accept="video/*"
+                                class="video-file-input"
+                            >
+
+
+                            <p class="upload-description">
+                                Select a new video from your computer.
+                            </p>
+
+
+                            <div
+                                id="selected-video-name"
+                                class="selected-video-name"
+                            >
+                                No new video selected
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <small class="field-help">
+                        {% if lesson.video_file %}
+                            Leave this empty to keep the current video.
+                        {% else %}
+                            Select a video file from your computer.
+                        {% endif %}
+                    </small>
+
+                </div>
+
+
+                <!-- =========================
+                     LESSON ORDER
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="lesson-order">
+                        Lesson Order
+                    </label>
+
+                    <input
+                        id="lesson-order"
+                        type="number"
+                        name="order"
+                        min="1"
+                        value="{{ lesson.order }}"
+                        required
+                    >
+
+                    <small class="field-help">
+                        Set the order in which this lesson appears in the course.
+                    </small>
+
+                </div>
+
+
+                <!-- =========================
+                     VIDEO TIP
+                ========================= -->
+
+                <div class="tip-box">
+
+                    <span class="tip-icon">
+                        💡
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Video Management Tip
+                        </strong>
+
+                        <p>
+                            You can keep the existing video or upload
+                            a new video file.
+                        </p>
+
+                        <p>
+                            If you upload a new video, the new file will
+                            be used for this lesson.
+                        </p>
+
+                        <p>
+                            For YouTube videos, use the embed format:
+                            <strong>
+                                https://www.youtube.com/embed/VIDEO_ID
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     ACTIONS
+                ========================= -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'instructor_dashboard' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="update-button"
+                    >
+                        💾 Update Lesson
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- BACK LINK -->
+
+        <a
+            href="{% url 'instructor_dashboard' %}"
+            class="back-link"
+        >
+            ← Back to Instructor Dashboard
+        </a>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+    <!-- =========================
+         VIDEO FILE SCRIPT
+    ========================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const videoInput =
+                    document.getElementById("video-file");
+
+                const videoName =
+                    document.getElementById("selected-video-name");
+
+
+                if (!videoInput || !videoName) {
+                    return;
+                }
+
+
+                videoInput.addEventListener(
+                    "change",
+                    function () {
+
+                        if (
+                            this.files &&
+                            this.files.length > 0
+                        ) {
+
+                            videoName.textContent =
+                                this.files[0].name;
+
+                            videoName.classList.add(
+                                "file-selected"
+                            );
+
+                        } else {
+
+                            videoName.textContent =
+                                "No new video selected";
+
+                            videoName.classList.remove(
+                                "file-selected"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

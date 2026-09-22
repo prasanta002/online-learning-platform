@@ -1,0 +1,467 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Add Lesson | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/create_lesson.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="page-container">
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <span class="page-label">
+                    LESSON MANAGEMENT
+                </span>
+
+                <h1>
+                    Add New Lesson
+                </h1>
+
+                <p>
+                    Add a new lesson and video to your course.
+                </p>
+
+            </div>
+
+            <div class="header-icon">
+                🎥
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             COURSE INFORMATION
+        ========================= -->
+
+        <div class="course-info">
+
+            <div class="course-info-icon">
+                📚
+            </div>
+
+            <div>
+
+                <span>
+                    Adding lesson to
+                </span>
+
+                <strong>
+                    {{ course.title }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             LESSON CARD
+        ========================= -->
+
+        <section class="lesson-card">
+
+            <div class="card-header">
+
+                <h2>
+                    Lesson Information
+                </h2>
+
+                <p>
+                    Enter the details and video information for this lesson.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 LESSON FORM
+            ========================= -->
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="lesson-form"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- LESSON TITLE -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Lesson Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Introduction to Python"
+                        required
+                    >
+
+                    <span class="field-help">
+                        Give the lesson a clear and descriptive title.
+                    </span>
+
+                </div>
+
+
+                <!-- LESSON DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Lesson Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="7"
+                        placeholder="Explain what students will learn in this lesson..."
+                    ></textarea>
+
+                    <span class="field-help">
+                        Briefly describe the topics covered in this lesson.
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     VIDEO URL
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="video_url">
+
+                        Video URL
+
+                        <span class="optional-label">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+                    <div class="video-input">
+
+                        <span class="video-icon">
+                            ▶
+                        </span>
+
+                        <input
+                            type="url"
+                            id="video_url"
+                            name="video_url"
+                            placeholder="https://www.youtube.com/embed/VIDEO_ID"
+                        >
+
+                    </div>
+
+                    <span class="field-help">
+                        Use this if you want to use a YouTube or external video.
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     VIDEO FILE UPLOAD
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="video_file">
+
+                        Upload Video
+
+                        <span class="optional-label">
+                            (Optional)
+                        </span>
+
+                    </label>
+
+
+                    <div class="video-upload-box">
+
+                        <!-- UPLOAD ICON -->
+
+                        <div class="upload-icon">
+                            🎬
+                        </div>
+
+
+                        <!-- UPLOAD CONTENT -->
+
+                        <div class="upload-content">
+
+                            <label
+                                for="video_file"
+                                class="upload-button"
+                            >
+                                Choose Video File
+                            </label>
+
+
+                            <input
+                                type="file"
+                                id="video_file"
+                                name="video_file"
+                                accept="video/*"
+                                class="video-file-input"
+                            >
+
+
+                            <p class="upload-description">
+                                Select a video from your computer.
+                            </p>
+
+
+                            <div
+                                id="selected-video-name"
+                                class="selected-video-name"
+                            >
+                                No video selected
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <span class="field-help">
+                        Select a video file from your computer.
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     LESSON ORDER
+                ========================= -->
+
+                <div class="form-group">
+
+                    <label for="order">
+                        Lesson Order
+                    </label>
+
+                    <input
+                        type="number"
+                        id="order"
+                        name="order"
+                        min="1"
+                        value="1"
+                        required
+                    >
+
+                    <span class="field-help">
+                        Set the order in which students should watch this lesson.
+                    </span>
+
+                </div>
+
+
+                <!-- =========================
+                     VIDEO TIP
+                ========================= -->
+
+                <div class="video-tip">
+
+                    <div class="tip-icon">
+                        💡
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Video Options
+                        </strong>
+
+                        <p>
+                            You can either provide a YouTube/external video URL
+                            or upload a video file from your computer.
+                        </p>
+
+                        <p>
+                            For YouTube videos, use the embed format:
+                            <strong>
+                                https://www.youtube.com/embed/VIDEO_ID
+                            </strong>
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     ACTIONS
+                ========================= -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'instructor_dashboard' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="create-button"
+                    >
+                        🎥 Add Lesson
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+    <!-- =========================
+         VIDEO FILE SCRIPT
+    ========================= -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const videoInput =
+                    document.getElementById("video_file");
+
+                const videoName =
+                    document.getElementById("selected-video-name");
+
+
+                if (!videoInput || !videoName) {
+                    return;
+                }
+
+
+                videoInput.addEventListener(
+                    "change",
+                    function () {
+
+                        if (this.files && this.files.length > 0) {
+
+                            videoName.textContent =
+                                this.files[0].name;
+
+                            videoName.classList.add(
+                                "file-selected"
+                            );
+
+                        } else {
+
+                            videoName.textContent =
+                                "No video selected";
+
+                            videoName.classList.remove(
+                                "file-selected"
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

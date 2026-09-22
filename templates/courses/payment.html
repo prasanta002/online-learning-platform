@@ -1,0 +1,600 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment | {{ course.title }}</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/payment.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'my_courses' %}">
+                    My Courses
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    Profile
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN PAYMENT AREA
+    ========================= -->
+
+    <main class="payment-container">
+
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <span class="page-label">
+                SECURE CHECKOUT
+            </span>
+
+            <h1>
+                Complete Your Payment
+            </h1>
+
+            <p>
+                Complete your payment to get instant access
+                to your course.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PAYMENT LAYOUT
+        ========================= -->
+
+        <section class="payment-layout">
+
+
+            <!-- =========================
+                 COURSE SUMMARY
+            ========================= -->
+
+            <div class="course-summary">
+
+                <div class="summary-icon">
+                    🎓
+                </div>
+
+                <span class="summary-label">
+                    COURSE
+                </span>
+
+                <h2>
+                    {{ course.title }}
+                </h2>
+
+                <p class="summary-description">
+                    You are purchasing access to this course.
+                    After successful payment, the course will
+                    be added to your learning dashboard.
+                </p>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Course Price
+                    </span>
+
+                    <strong>
+                        ₹{{ course.price }}
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Access
+                    </span>
+
+                    <strong>
+                        Lifetime
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="secure-box">
+
+                    <span class="secure-icon">
+                        🔒
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Secure Payment
+                        </strong>
+
+                        <p>
+                            Your payment is securely processed
+                            by Razorpay.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 PAYMENT CARD
+            ========================= -->
+
+            <div class="payment-card">
+
+                <div class="payment-card-header">
+
+                    <span class="card-label">
+                        PAYMENT
+                    </span>
+
+                    <h2>
+                        Pay Securely
+                    </h2>
+
+                    <p>
+                        Review your order and continue
+                        to secure checkout.
+                    </p>
+
+                </div>
+
+
+                <div class="price-section">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong>
+                        ₹{{ course.price }}
+                    </strong>
+
+                    <small>
+                        Inclusive of all applicable charges
+                    </small>
+
+                </div>
+
+
+                <div class="payment-features">
+
+                    <div class="feature-item">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        <p>
+                            Secure Razorpay checkout
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        <p>
+                            Instant course enrollment
+                        </p>
+
+                    </div>
+
+
+                    <div class="feature-item">
+
+                        <span>
+                            ✓
+                        </span>
+
+                        <p>
+                            Access your course after payment
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    id="pay-button"
+                    class="pay-button"
+                    type="button"
+                >
+                    💳 Pay ₹{{ course.price }}
+                </button>
+
+
+                <div class="payment-security">
+
+                    🔒 Secure payment powered by
+                    <strong>
+                        Razorpay
+                    </strong>
+
+                </div>
+
+
+                <a
+                    href="{% url 'course_detail' course.id %}"
+                    class="back-link"
+                >
+                    ← Back to Course
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             PAYMENT NOTE
+        ========================= -->
+
+        <div class="payment-note">
+
+            <span>
+                🛡️
+            </span>
+
+            <p>
+                Your payment information is processed securely.
+                Do not refresh or close this page while the
+                payment window is open.
+            </p>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    🎓 EduLearn
+                </div>
+
+                <p>
+                    Learn. Grow. Succeed.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Account
+                </h4>
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'my_courses' %}">
+                    My Courses
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 EduLearn.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         RAZORPAY CHECKOUT
+    ========================= -->
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js">
+    </script>
+
+
+    <script>
+
+        function getCookie(name) {
+
+            let cookieValue = null;
+
+            if (
+                document.cookie &&
+                document.cookie !== ""
+            ) {
+
+                const cookies =
+                    document.cookie.split(";");
+
+                for (let cookie of cookies) {
+
+                    cookie = cookie.trim();
+
+                    if (
+                        cookie.startsWith(
+                            name + "="
+                        )
+                    ) {
+
+                        cookieValue =
+                            decodeURIComponent(
+                                cookie.substring(
+                                    name.length + 1
+                                )
+                            );
+
+                        break;
+
+                    }
+
+                }
+
+            }
+
+            return cookieValue;
+
+        }
+
+
+        var options = {
+
+            "key":
+                "{{ razorpay_key_id }}",
+
+            "amount":
+                "{{ order.amount }}",
+
+            "currency":
+                "INR",
+
+            "name":
+                "Online Learning Platform",
+
+            "description":
+                "{{ course.title }}",
+
+            "order_id":
+                "{{ order.id }}",
+
+
+            "handler":
+                function (response) {
+
+                    fetch(
+                        "{% url 'verify_payment' %}",
+                        {
+
+                            method: "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/x-www-form-urlencoded",
+
+                                "X-CSRFToken":
+                                    getCookie("csrftoken")
+
+                            },
+
+                            body:
+                                new URLSearchParams({
+
+                                    "razorpay_payment_id":
+                                        response.razorpay_payment_id,
+
+                                    "razorpay_order_id":
+                                        response.razorpay_order_id,
+
+                                    "razorpay_signature":
+                                        response.razorpay_signature
+
+                                })
+
+                        }
+                    )
+
+                    .then(
+                        response => response.json()
+                    )
+
+                    .then(
+                        data => {
+
+                            if (data.success) {
+
+                                alert(
+                                    data.message
+                                );
+
+                                window.location.href =
+                                    "{% url 'course_detail' course.id %}";
+
+                            }
+
+                            else {
+
+                                alert(
+                                    data.message
+                                );
+
+                            }
+
+                        }
+                    )
+
+                    .catch(
+                        error => {
+
+                            console.error(error);
+
+                            alert(
+                                "Something went wrong while verifying payment."
+                            );
+
+                        }
+                    );
+
+                },
+
+
+            "theme": {
+
+                "color":
+                    "#2f80ed"
+
+            }
+
+        };
+
+
+        var rzp =
+            new Razorpay(options);
+
+
+        document.getElementById(
+            "pay-button"
+        ).onclick = function (e) {
+
+            rzp.open();
+
+            e.preventDefault();
+
+        };
+
+    </script>
+
+
+</body>
+
+</html>

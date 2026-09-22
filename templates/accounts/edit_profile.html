@@ -1,0 +1,359 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Profile | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/edit_profile.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            <nav class="nav-links">
+
+                <a
+                   href="{% url 'dashboard' %}"
+                    class="dashboard-button"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'profile' %}"
+                    class="active"
+                >
+                    Profile
+                </a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main class="edit-profile-container">
+
+
+        <!-- PAGE HEADER -->
+
+        <section class="page-header">
+
+            <span class="page-label">
+                ACCOUNT SETTINGS
+            </span>
+
+            <h1>
+                Edit Your Profile
+            </h1>
+
+            <p>
+                Update your personal information and keep
+                your account details up to date.
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             PROFILE FORM
+        ========================= -->
+
+        <section class="profile-card">
+
+
+            <div class="profile-card-header">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>
+                        Personal Information
+                    </h2>
+
+                    <p>
+                        Update the information associated
+                        with your account.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-divider"></div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- FIRST NAME -->
+
+                <div class="form-group">
+
+                    <label for="first_name">
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="first_name"
+                        name="first_name"
+                        value="{{ user.first_name }}"
+                        placeholder="Enter your first name"
+                    >
+
+                </div>
+
+
+                <!-- LAST NAME -->
+
+                <div class="form-group">
+
+                    <label for="last_name">
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        value="{{ user.last_name }}"
+                        placeholder="Enter your last name"
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value="{{ user.email }}"
+                        placeholder="Enter your email address"
+                        required
+                    >
+
+                    <small>
+                        This email address is associated with
+                        your EduLearn account.
+                    </small>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'profile' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="save-button"
+                    >
+                        ✓ Save Changes
+                    </button>
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+        <!-- =========================
+             SECURITY CARD
+        ========================= -->
+
+        <section class="security-card">
+
+            <div class="security-icon">
+                🔒
+            </div>
+
+
+            <div class="security-content">
+
+                <h3>
+                    Account Security
+                </h3>
+
+                <p>
+                    Want to change your password?
+                    You can update it from your account
+                    security settings.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'password_change' %}"
+                class="security-button"
+            >
+                Change Password
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    🎓 EduLearn
+                </div>
+
+                <p>
+                    Learn. Grow. Succeed.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Account
+                </h4>
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'my_courses' %}">
+                    My Courses
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 EduLearn.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

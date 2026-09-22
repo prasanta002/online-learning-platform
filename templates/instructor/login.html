@@ -1,0 +1,325 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Officer Login | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/officer_login.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         LOGIN PAGE
+    ========================= -->
+
+    <main class="login-page">
+
+
+        <!-- =========================
+             BRAND
+        ========================= -->
+
+        <div class="login-brand">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand-logo"
+            >
+                🎓 EduLearn
+            </a>
+
+            <span class="brand-label">
+                OFFICER PORTAL
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             LOGIN CARD
+        ========================= -->
+
+        <section class="login-card">
+
+
+            <!-- ICON -->
+
+            <div class="login-icon">
+                🔐
+            </div>
+
+
+            <!-- HEADER -->
+
+            <div class="login-header">
+
+                <span class="page-label">
+                    OFFICER ACCESS
+                </span>
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <p>
+                    Sign in to manage your EduLearn platform.
+                </p>
+
+            </div>
+
+
+            <!-- =========================
+                 MESSAGES
+            ========================= -->
+
+            {% if messages %}
+
+                <div class="messages">
+
+                    {% for message in messages %}
+
+                        <div class="message">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+
+            <!-- =========================
+                 LOGIN FORM
+            ========================= -->
+
+            <form
+                method="POST"
+                action="{% url 'officer_login' %}"
+                class="login-form"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Officer Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <div class="label-row">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                    </div>
+
+                    <div class="password-wrapper">
+
+                        <input
+                            type="password"
+                            id="admin-password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="admin-password-toggle"
+                            aria-label="Show password"
+                            title="Show password"
+                        >
+                           👁️
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    🔐 Sign In as Officer
+                </button>
+
+            </form>
+
+
+            <!-- =========================
+                 LINKS
+            ========================= -->
+
+            <div class="login-links">
+
+                <a href="{% url 'password_reset' %}">
+                    Forgot Password?
+                </a>
+
+                <span>
+                    •
+                </span>
+
+                <a href="{% url 'login' %}">
+                    Student Login
+                </a>
+
+            </div>
+
+
+            <!-- =========================
+                 STUDENT ACCOUNT
+            ========================= -->
+
+            <div class="register-box">
+
+                <span>
+                    Want to learn with EduLearn?
+                </span>
+
+                <a href="{% url 'register' %}">
+                    Create Student Account
+                </a>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================= -->
+
+        <footer class="login-footer">
+
+            © 2026 EduLearn.
+            All rights reserved.
+
+        </footer>
+
+
+    </main>
+
+
+    <script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            const passwordInput =
+                document.getElementById(
+                    "admin-password"
+                );
+
+            const passwordToggle =
+                document.getElementById(
+                    "admin-password-toggle"
+                );
+
+            if (
+                !passwordInput ||
+                !passwordToggle
+            ) {
+                return;
+            }
+
+            passwordToggle.addEventListener(
+                "click",
+                function () {
+
+                    if (
+                        passwordInput.type ===
+                        "password"
+                    ) {
+
+                        passwordInput.type =
+                            "text";
+
+                        passwordToggle.textContent =
+                            "🙈";
+
+                        passwordToggle.setAttribute(
+                            "aria-label",
+                            "Hide password"
+                        );
+
+                        passwordToggle.setAttribute(
+                            "title",
+                            "Hide password"
+                        );
+
+                    } else {
+
+                        passwordInput.type =
+                            "password";
+
+                        passwordToggle.textContent =
+                            "👁️";
+
+                        passwordToggle.setAttribute(
+                            "aria-label",
+                            "Show password"
+                        );
+
+                        passwordToggle.setAttribute(
+                            "title",
+                            "Show password"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/instructor_students.css' %}"
+    >
+
+    <title>Student Management | EduLearn</title>
+
+</head>
+
+<body>
+
+    <!-- =========================
+         Navbar
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🎓 EduLearn
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'instructor_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'officer_logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         Main Content
+    ========================== -->
+
+    <main class="students-page">
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div>
+
+                <p class="page-label">
+                    OFFICER PORTAL
+                </p>
+
+                <h1>
+                    Student Management
+                </h1>
+
+                <p>
+                    View students enrolled in your courses.
+                </p>
+
+            </div>
+
+            <div class="student-icon">
+                👨‍🎓
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Summary Card
+        ========================== -->
+
+        <section class="summary-card">
+
+            <div class="summary-icon">
+                👥
+            </div>
+
+            <div>
+
+                <span>
+                    Enrollment Records
+                </span>
+
+                <strong>
+                    {{ enrollments|length }}
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Student Table
+        ========================== -->
+
+        <section class="students-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Enrolled Students
+                    </h2>
+
+                    <p>
+                        Students currently enrolled in your courses.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if enrollments %}
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Enrollment Date
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for enrollment in enrollments %}
+
+                            <tr>
+
+                                <!-- Student -->
+
+                                <td>
+
+                                    <div class="student-info">
+
+                                        <div class="student-avatar">
+
+                                            {{ enrollment.student.username|first|upper }}
+
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                {{ enrollment.student.username }}
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Email -->
+
+                                <td>
+
+                                    <span class="email">
+
+                                        {{ enrollment.student.email }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Course -->
+
+                                <td>
+
+                                    <span class="course-name">
+
+                                        {{ enrollment.course.title }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Enrollment Date -->
+
+                                <td>
+
+                                    <div class="enrollment-date">
+
+                                        <strong>
+                                            {{ enrollment.enrolled_at|date:"d M Y" }}
+                                        </strong>
+
+                                        <small>
+                                            {{ enrollment.enrolled_at|date:"h:i A" }}
+                                        </small>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <!-- Empty State -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        👨‍🎓
+                    </div>
+
+                    <h3>
+                        No Students Yet
+                    </h3>
+
+                    <p>
+                        No students have enrolled in your courses yet.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- Back Button -->
+
+        <div class="page-actions">
+
+            <a
+                href="{% url 'instructor_dashboard' %}"
+                class="back-button"
+            >
+                ← Back to Officer Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 EduLearn. Officer Portal.
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

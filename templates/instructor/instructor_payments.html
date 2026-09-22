@@ -1,0 +1,404 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment Management | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/instructor_payments.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="payments-page">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <span class="page-label">
+                    FINANCE MANAGEMENT
+                </span>
+
+                <h1>
+                    Payment Management
+                </h1>
+
+                <p>
+                    View and monitor student course payments.
+                </p>
+
+            </div>
+
+            <div class="payment-icon">
+                💳
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PAYMENT SUMMARY
+        ========================= -->
+
+        {% if payments %}
+
+        <div class="summary-grid">
+
+            <div class="summary-card">
+
+                <div class="summary-icon blue">
+                    💳
+                </div>
+
+                <div>
+
+                    <span>
+                        Total Payments
+                    </span>
+
+                    <strong>
+                        {{ payments|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="summary-icon green">
+                    ✓
+                </div>
+
+                <div>
+
+                    <span>
+                        Payment Records
+                    </span>
+
+                    <strong>
+                        {{ payments|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             PAYMENT TABLE
+        ========================= -->
+
+        <section class="payments-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Payment Records
+                    </h2>
+
+                    <p>
+                        Student payment transactions for your courses.
+                    </p>
+
+                </div>
+
+                <span class="record-count">
+                    {{ payments|length }} Records
+                </span>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Amount
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Date
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for payment in payments %}
+
+                        <tr>
+
+                            <!-- STUDENT -->
+
+                            <td>
+
+                                <div class="student-cell">
+
+                                    <div class="student-avatar">
+                                        {{ payment.student.username|first|upper }}
+                                    </div>
+
+                                    <div>
+
+                                        <strong>
+                                            {{ payment.student.username }}
+                                        </strong>
+
+                                        <span>
+                                            Student
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- EMAIL -->
+
+                            <td>
+
+                                <span class="email">
+                                    {{ payment.student.email }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- COURSE -->
+
+                            <td>
+
+                                <span class="course-name">
+                                    {{ payment.course.title }}
+                                </span>
+
+                            </td>
+
+
+                            <!-- AMOUNT -->
+
+                            <td>
+
+                                <strong class="amount">
+                                    ₹{{ payment.amount }}
+                                </strong>
+
+                            </td>
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if payment.status == "paid" %}
+
+                                    <span class="status status-paid">
+                                        ✓ Paid
+                                    </span>
+
+                                {% elif payment.status == "failed" %}
+
+                                    <span class="status status-failed">
+                                        ✕ Failed
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="status status-pending">
+                                        ● {{ payment.status|title }}
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- DATE -->
+
+                            <td>
+
+                                <div class="date-cell">
+
+                                    <strong>
+                                        {{ payment.created_at|date:"M d, Y" }}
+                                    </strong>
+
+                                    <span>
+                                        {{ payment.created_at|date:"h:i A" }}
+                                    </span>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        {% else %}
+
+
+        <!-- =========================
+             EMPTY STATE
+        ========================= -->
+
+        <section class="empty-card">
+
+            <div class="empty-icon">
+                💳
+            </div>
+
+            <h2>
+                No Payments Found
+            </h2>
+
+            <p>
+                There are no payment records available yet.
+                Payment information will appear here when students
+                purchase your courses.
+            </p>
+
+            <a
+                href="{% url 'instructor_dashboard' %}"
+                class="empty-button"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </section>
+
+        {% endif %}
+
+
+        <!-- BACK LINK -->
+
+        <a
+            href="{% url 'instructor_dashboard' %}"
+            class="back-link"
+        >
+            ← Back to Instructor Dashboard
+        </a>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+</body>
+
+</html>

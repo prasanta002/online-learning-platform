@@ -1,0 +1,373 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Progress | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/student_progress.css' %}"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         Navbar
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            🎓 EduLearn
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{% url 'instructor_dashboard' %}">
+                Dashboard
+            </a>
+
+            <a href="{% url 'officer_logout' %}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         Main Content
+    ========================== -->
+
+    <main class="progress-page">
+
+        <!-- Page Header -->
+
+        <section class="page-header">
+
+            <div>
+
+                <p class="page-label">
+                    OFFICER PORTAL
+                </p>
+
+                <h1>
+                    Student Progress
+                </h1>
+
+                <p>
+                    Track the learning progress of your students.
+                </p>
+
+            </div>
+
+            <div class="progress-icon">
+                📊
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Summary
+        ========================== -->
+
+        <section class="summary-card">
+
+            <div class="summary-icon">
+                👨‍🎓
+            </div>
+
+            <div>
+
+                <span>
+                    Student Records
+                </span>
+
+                <strong>
+                    {{ progress_data|length }}
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Progress Table
+        ========================== -->
+
+        <section class="progress-card">
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Learning Progress
+                    </h2>
+
+                    <p>
+                        Monitor student course completion.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            {% if progress_data %}
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Student
+                                </th>
+
+                                <th>
+                                    Email
+                                </th>
+
+                                <th>
+                                    Course
+                                </th>
+
+                                <th>
+                                    Lessons
+                                </th>
+
+                                <th>
+                                    Progress
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            {% for item in progress_data %}
+
+                            <tr>
+
+                                <!-- Student -->
+
+                                <td>
+
+                                    <div class="student-info">
+
+                                        <div class="student-avatar">
+
+                                            {{ item.student.username|first|upper }}
+
+                                        </div>
+
+                                        <div>
+
+                                            <strong>
+                                                {{ item.student.username }}
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- Email -->
+
+                                <td>
+
+                                    <span class="email">
+
+                                        {{ item.student.email }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Course -->
+
+                                <td>
+
+                                    <span class="course-name">
+
+                                        {{ item.course.title }}
+
+                                    </span>
+
+                                </td>
+
+
+                                <!-- Lessons -->
+
+                                <td>
+
+                                    <div class="lesson-count">
+
+                                        <strong>
+                                            {{ item.completed_lessons }}
+                                        </strong>
+
+                                        <span>
+                                            / {{ item.total_lessons }}
+                                        </span>
+
+                                    </div>
+
+                                    <small>
+                                        lessons completed
+                                    </small>
+
+                                </td>
+
+
+                                <!-- Progress -->
+
+                                <td>
+
+                                    <div class="progress-info">
+
+                                        <div class="progress-percentage">
+
+                                            {{ item.progress_percentage }}%
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="progress-bar">
+
+                                        <div
+                                            class="progress-fill"
+                                            data-progress="{{ item.progress_percentage }}"
+                                        ></div>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            {% else %}
+
+                <!-- Empty State -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        📊
+                    </div>
+
+                    <h3>
+                        No Student Progress Found
+                    </h3>
+
+                    <p>
+                        Student progress will appear here
+                        after students enroll in your courses.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+        <!-- Back Button -->
+
+        <div class="page-actions">
+
+            <a
+                href="{% url 'instructor_dashboard' %}"
+                class="back-button"
+            >
+                ← Back to Officer Dashboard
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 EduLearn. Officer Portal.
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         Progress JavaScript
+    ========================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                const progressBars =
+                    document.querySelectorAll(
+                        ".progress-fill"
+                    );
+
+                progressBars.forEach(
+                    function (bar) {
+
+                        const progress =
+                            bar.getAttribute(
+                                "data-progress"
+                            ) || 0;
+
+                        bar.style.width =
+                            progress + "%";
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

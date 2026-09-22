@@ -1,0 +1,422 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Free Courses | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/free_courses.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-container">
+
+
+            <!-- =========================
+                 LOGO
+            ========================== -->
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            {% if user.is_authenticated %}
+
+
+                <!-- =========================
+                     LOGGED-IN NAVBAR
+                ========================== -->
+
+                <div class="nav-links">
+
+                    <a href="{% url 'dashboard' %}">
+                        Dashboard
+                    </a>
+
+                    <a href="{% url 'profile' %}">
+                        Profile
+                    </a>
+
+                </div>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="{% url 'logout' %}"
+                        class="logout-button"
+                    >
+                        Logout
+                    </a>
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =========================
+                     LOGGED-OUT NAVBAR
+                ========================== -->
+
+                <div class="nav-links">
+
+                    <a href="{% url 'home' %}">
+                        Home
+                    </a>
+
+                    <a href="{% url 'course_list' %}">
+                        Courses
+                    </a>
+
+                    <a href="{% url 'free_courses' %}">
+                        Free Courses
+                    </a>
+
+                    <a href="{% url 'paid_courses' %}">
+                        Paid Courses
+                    </a>
+
+                </div>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="login-link"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="{% url 'register' %}"
+                        class="register-link"
+                    >
+                        Register
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         HERO
+    ================================= -->
+
+    <section class="free-hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                🆓 100% Free Learning
+            </span>
+
+            <h1>
+                Free Courses
+            </h1>
+
+            <p>
+                Start learning new skills without spending
+                any money. Explore our collection of free
+                courses and begin your learning journey today.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         COURSE SECTION
+    ================================= -->
+
+    <main class="courses-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    LEARN FOR FREE
+                </span>
+
+                <h2>
+                    Explore Free Courses
+                </h2>
+
+            </div>
+
+            <div class="course-count">
+
+                {{ courses|length }}
+
+                {% if courses|length == 1 %}
+                    Free Course
+                {% else %}
+                    Free Courses
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             COURSE GRID
+        ================================= -->
+
+        <div class="course-grid">
+
+
+            {% for course in courses %}
+
+                <article class="course-card">
+
+
+                    <!-- Course Image/Icon -->
+
+                    <div class="course-image">
+
+                        <div class="course-icon">
+                            🎓
+                        </div>
+
+                        <span class="free-badge">
+                            FREE
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Course Content -->
+
+                    <div class="course-content">
+
+
+                        <div class="course-category">
+
+                            🏷️
+
+                            {% if course.category %}
+                                {{ course.category.name }}
+                            {% else %}
+                                General
+                            {% endif %}
+
+                        </div>
+
+
+                        <h3>
+
+                            <a
+                                href="{% url 'course_detail' course.id %}"
+                            >
+                                {{ course.title }}
+                            </a>
+
+                        </h3>
+
+
+                        <p class="course-description">
+
+                            {{ course.description|truncatewords:22 }}
+
+                        </p>
+
+
+
+                        <!-- Course Info -->
+
+                        <div class="course-meta">
+
+                            <span>
+                                👨‍🏫
+                                {{ course.instructor.username }}
+                            </span>
+
+                            <span>
+                                🆓 Free
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Button -->
+
+                        <a
+                            href="{% url 'course_detail' course.id %}"
+                            class="view-course-button"
+                        >
+                            View Free Course
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+
+                <!-- No Courses -->
+
+                <div class="no-courses">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h2>
+                        No Free Courses Available
+                    </h2>
+
+                    <p>
+                        Free courses will appear here when
+                        they are available.
+                    </p>
+
+                    <a
+                        href="{% url 'course_list' %}"
+                        class="browse-button"
+                    >
+                        Browse All Courses →
+                    </a>
+
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         CTA
+    ================================= -->
+
+    <section class="free-cta">
+
+        <div class="cta-content">
+
+            <h2>
+                Ready to Start Learning?
+            </h2>
+
+            <p>
+                Explore more courses and build your skills
+                with EduLearn.
+            </p>
+
+            <a
+                href="{% url 'course_list' %}"
+                class="cta-button"
+            >
+                Explore All Courses →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ================================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+
+                <h3>
+                    🎓 EduLearn
+                </h3>
+
+                <p>
+                    Learn new skills. Build your future.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 EduLearn. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

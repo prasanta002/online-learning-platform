@@ -1,0 +1,346 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Course | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/create_course.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="page-container">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+            <div>
+
+                <span class="page-label">
+                    COURSE MANAGEMENT
+                </span>
+
+                <h1>
+                    Create New Course
+                </h1>
+
+                <p>
+                    Add a new course to your EduLearn learning platform.
+                </p>
+
+            </div>
+
+            <div class="header-icon">
+                📚
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORM CARD
+        ========================= -->
+
+        <section class="course-card">
+
+
+            <div class="card-header">
+
+                <h2>
+                    Course Information
+                </h2>
+
+                <p>
+                    Enter the details of your new course below.
+                </p>
+
+            </div>
+
+
+            <form
+                method="POST"
+                class="course-form"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- COURSE TITLE -->
+
+                <div class="form-group">
+
+                    <label for="title">
+                        Course Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        placeholder="e.g. Python Programming for Beginners"
+                        required
+                    >
+
+                    <span class="field-help">
+                        Choose a clear and descriptive course name.
+                    </span>
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="category">
+                        Category
+                    </label>
+
+                    <select
+                        id="category"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select a category
+                        </option>
+
+                        {% for category in categories %}
+
+                            <option value="{{ category.id }}">
+                                {{ category.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="description">
+                        Course Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        name="description"
+                        rows="7"
+                        placeholder="Explain what students will learn in this course..."
+                        required
+                    ></textarea>
+
+                    <span class="field-help">
+                        Give students a short overview of the course.
+                    </span>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label for="price">
+                        Course Price
+                    </label>
+
+                    <div class="price-input">
+
+                        <span class="currency">
+                            ₹
+                        </span>
+
+                        <input
+                            type="number"
+                            id="price"
+                            name="price"
+                            step="0.01"
+                            min="0"
+                            placeholder="0.00"
+                            required
+                        >
+
+                    </div>
+
+                    <span class="field-help">
+                        Enter 0 for a free course.
+                    </span>
+
+                </div>
+
+
+                <!-- PUBLISH -->
+
+                <div class="publish-card">
+
+                    <div class="publish-icon">
+                        ✓
+                    </div>
+
+                    <div class="publish-content">
+
+                        <label
+                            for="is_published"
+                            class="publish-title"
+                        >
+                            Publish this course
+                        </label>
+
+                        <p>
+                            Make this course visible to students immediately.
+                        </p>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="is_published"
+                            name="is_published"
+                            checked
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'instructor_dashboard' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="create-button"
+                    >
+                        📚 Create Course
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- INFO -->
+
+        <div class="course-tip">
+
+            <span class="tip-icon">
+                💡
+            </span>
+
+            <div>
+
+                <strong>
+                    Course Tip
+                </strong>
+
+                <p>
+                    After creating the course, you can add lessons and
+                    teaching videos from your instructor dashboard.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+</body>
+
+</html>

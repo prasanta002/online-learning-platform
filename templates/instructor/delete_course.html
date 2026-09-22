@@ -1,0 +1,208 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Delete Course | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/delete_course.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="delete-page">
+
+
+        <!-- =========================
+             DELETE CARD
+        ========================= -->
+
+        <section class="delete-card">
+
+
+            <!-- ICON -->
+
+            <div class="delete-icon">
+                🗑️
+            </div>
+
+
+            <!-- HEADER -->
+
+            <span class="page-label">
+                COURSE MANAGEMENT
+            </span>
+
+            <h1>
+                Delete Course
+            </h1>
+
+            <p class="delete-subtitle">
+                Are you sure you want to permanently delete this course?
+            </p>
+
+
+            <!-- COURSE -->
+
+            <div class="course-box">
+
+                <div class="course-box-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <span>
+                        Course
+                    </span>
+
+                    <h2>
+                        {{ course.title }}
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- WARNING -->
+
+            <div class="warning-box">
+
+                <div class="warning-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <strong>
+                        This action cannot be undone.
+                    </strong>
+
+                    <p>
+                        Deleting this course may also remove its
+                        associated lessons and course data.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="actions">
+
+                    <a
+                        href="{% url 'instructor_dashboard' %}"
+                        class="cancel-button"
+                    >
+                        ← Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="delete-button"
+                    >
+                        🗑️ Yes, Delete Course
+                    </button>
+
+                </div>
+
+            </form>
+
+
+        </section>
+
+
+        <!-- BACK LINK -->
+
+        <a
+            href="{% url 'instructor_dashboard' %}"
+            class="back-link"
+        >
+            ← Return to Instructor Dashboard
+        </a>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+</body>
+
+</html>

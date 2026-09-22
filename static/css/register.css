@@ -1,0 +1,351 @@
+/* ==============================
+   REGISTER PAGE
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8fc;
+    color: #102d4f;
+}
+
+
+/* ==============================
+   PAGE
+================================= */
+
+.register-page {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+}
+
+
+/* ==============================
+   REGISTER CARD
+================================= */
+
+.register-card {
+    width: 100%;
+    max-width: 440px;
+
+    background: #ffffff;
+
+    padding: 40px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 35px rgba(16, 45, 79, 0.12);
+}
+
+
+/* ==============================
+   LOGO
+================================= */
+
+.register-logo {
+    width: 60px;
+    height: 60px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf3ff;
+
+    border-radius: 50%;
+
+    font-size: 30px;
+}
+
+
+/* ==============================
+   HEADING
+================================= */
+
+.register-card h1 {
+    text-align: center;
+
+    font-size: 28px;
+
+    margin-bottom: 10px;
+
+    color: #102d4f;
+}
+
+
+.register-subtitle {
+    text-align: center;
+
+    color: #6b7a90;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 28px;
+}
+
+
+/* ==============================
+   MESSAGES
+================================= */
+
+.messages {
+    margin-bottom: 20px;
+}
+
+
+.message {
+    padding: 12px 14px;
+
+    background: #fff3cd;
+
+    color: #856404;
+
+    border: 1px solid #ffe69c;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+
+/* ==============================
+   FORM
+================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    color: #102d4f;
+}
+
+
+.form-group input {
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d6deea;
+
+    border-radius: 8px;
+
+    background: #ffffff;
+
+    color: #102d4f;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+
+.form-group input:focus {
+    border-color: #2f80ed;
+
+    box-shadow:
+        0 0 0 3px rgba(47, 128, 237, 0.10);
+}
+
+
+.form-group input::placeholder {
+    color: #9aa7b7;
+}
+
+
+/* ==============================
+   REGISTER BUTTON
+================================= */
+
+.register-button {
+    width: 100%;
+
+    border: none;
+
+    padding: 14px;
+
+    margin-top: 5px;
+
+    background: #2f80ed;
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.register-button:hover {
+    background: #1769d1;
+}
+
+
+/* ==============================
+   LINKS
+================================= */
+
+.register-links {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-top: 22px;
+
+    font-size: 13px;
+}
+
+
+.register-links a {
+    color: #2f80ed;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.register-links a:hover {
+    text-decoration: underline;
+}
+
+
+.register-links span {
+    color: #a0aaba;
+}
+
+
+/* ==============================
+   ADMIN LOGIN
+================================= */
+
+.admin-text {
+    text-align: center;
+
+    margin-top: 20px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #edf1f6;
+
+    color: #6b7a90;
+
+    font-size: 13px;
+}
+
+
+.admin-text a {
+    color: #102d4f;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.admin-text a:hover {
+    text-decoration: underline;
+}
+
+
+/* ==============================
+   FOOTER
+================================= */
+
+.footer-text {
+    margin-top: 22px;
+
+    color: #8b98a9;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+
+/* ==============================
+   MOBILE
+================================= */
+
+@media (max-width: 600px) {
+
+    .register-page {
+        padding: 20px 15px;
+    }
+
+
+    .register-card {
+        padding: 28px 22px;
+
+        border-radius: 12px;
+    }
+
+
+    .register-card h1 {
+        font-size: 24px;
+    }
+
+
+    .register-logo {
+        width: 54px;
+        height: 54px;
+
+        font-size: 26px;
+    }
+
+
+    .register-links {
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .register-links span {
+        display: none;
+    }
+
+}

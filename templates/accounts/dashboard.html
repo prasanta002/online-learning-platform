@@ -1,0 +1,556 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Student Dashboard | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/dashboard.css' %}"
+    >
+
+    <script
+        src="{% static 'js/dashboard.js' %}"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+
+            <!-- Logo -->
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            <!-- Navigation -->
+
+            <nav class="nav-links">
+
+                
+                    
+            
+                
+                
+                    
+                
+
+                <a
+                   href="{% url 'dashboard' %}"
+                    class="dashboard-button"
+                >
+                    Dashboard
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+
+
+                <a href="{% url 'profile' %}">
+                    Profile
+                </a>
+
+            </nav>
+
+
+            <!-- Logout -->
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         DASHBOARD CONTAINER
+    ========================= -->
+
+    <div class="dashboard-container">
+
+
+        <!-- =========================
+             DASHBOARD HEADER
+        ========================= -->
+
+        <section class="dashboard-header">
+
+            <div>
+
+                <span class="dashboard-label">
+                    STUDENT DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome back,
+                    {{ user.username }}! 👋
+                </h1>
+
+                <p>
+                    Continue your learning journey
+                    and build your future.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             LEARNING PROGRESS
+        ========================= -->
+
+        {% if enrolled_courses %}
+
+            <section class="progress-section">
+
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-label">
+                            YOUR LEARNING
+                        </span>
+
+                        <h2>
+                            📊 My Learning Progress
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="progress-grid">
+
+
+                    {% for item in enrolled_courses %}
+
+
+                        <div class="progress-card">
+
+
+                            <div class="progress-card-header">
+
+                                <h3>
+                                    {{ item.course.title }}
+                                </h3>
+
+                                <span class="progress-percentage">
+                                    {{ item.progress_percentage }}%
+                                </span>
+
+                            </div>
+
+
+                            <p class="progress-lessons">
+
+                                {{ item.completed_lessons }}
+
+                                /
+
+                                {{ item.total_lessons }}
+
+                                lessons completed
+
+                            </p>
+
+
+                            <div class="progress-bar-container">
+
+                                <div
+                                    class="progress-bar"
+                                    data-progress="{{ item.progress_percentage }}"
+                                >
+
+                                    <span>
+                                        {{ item.progress_percentage }}%
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            </section>
+
+
+        {% endif %}
+
+
+
+        <!-- =========================
+             QUICK ACCESS
+        ========================= -->
+
+        <section class="dashboard-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        QUICK ACCESS
+                    </span>
+
+                    <h2>
+                        Continue Learning
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="dashboard-grid">
+
+
+                <!-- My Courses -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        📚
+                    </div>
+
+                    <h2>
+                        My Courses
+                    </h2>
+
+                    <p>
+                        View your enrolled courses
+                        and continue learning.
+                    </p>
+
+                    <a href="{% url 'my_courses' %}">
+                        My Courses →
+                    </a>
+
+                </div>
+
+
+
+                <!-- Browse Courses -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🎓
+                    </div>
+
+                    <h2>
+                        Browse Courses
+                    </h2>
+
+                    <p>
+                        Explore all available
+                        courses and find something new.
+                    </p>
+
+                    <a href="{% url 'course_list' %}">
+                        Browse Courses →
+                    </a>
+
+                </div>
+
+
+
+                <!-- Free Courses -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        🆓
+                    </div>
+
+                    <h2>
+                        Free Courses
+                    </h2>
+
+                    <p>
+                        Learn new skills from our
+                        available free courses.
+                    </p>
+
+                    <a href="{% url 'free_courses' %}">
+                        Free Courses →
+                    </a>
+
+                </div>
+
+
+
+                <!-- Paid Courses -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        💳
+                    </div>
+
+                    <h2>
+                        Paid Courses
+                    </h2>
+
+                    <p>
+                        Explore premium courses
+                        and start learning.
+                    </p>
+
+                    <a href="{% url 'paid_courses' %}">
+                        Paid Courses →
+                    </a>
+
+                </div>
+
+
+
+                <!-- Payment History -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        💰
+                    </div>
+
+                    <h2>
+                        Payment History
+                    </h2>
+
+                    <p>
+                        View your previous
+                        course payments.
+                    </p>
+
+                    <a href="{% url 'payment_history' %}">
+                        Payment History →
+                    </a>
+
+                </div>
+
+
+
+                <!-- Profile -->
+
+                <div class="dashboard-card">
+
+                    <div class="card-icon">
+                        👤
+                    </div>
+
+                    <h2>
+                        My Profile
+                    </h2>
+
+                    <p>
+                        View and update your
+                        profile information.
+                    </p>
+
+                    <a href="{% url 'profile' %}">
+                        My Profile →
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             LEARNING CTA
+        ========================= -->
+
+        <section class="dashboard-cta">
+
+            <div>
+
+                <h2>
+                    Ready to Learn Something New?
+                </h2>
+
+                <p>
+                    Explore our courses and
+                    continue building your skills.
+                </p>
+
+                <a
+                    href="{% url 'course_list' %}"
+                    class="cta-button"
+                >
+                    Explore Courses →
+                </a>
+
+            </div>
+
+        </section>
+
+
+
+    </div>
+
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+
+        <div class="footer-container">
+
+
+            <!-- Brand -->
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    🎓 EduLearn
+                </div>
+
+                <p>
+                    Learn. Grow. Succeed.
+                </p>
+
+            </div>
+
+
+
+            <!-- Platform -->
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+
+
+            <!-- Account -->
+
+            <div class="footer-column">
+
+                <h4>
+                    Account
+                </h4>
+
+                <a href="{% url 'profile' %}">
+                    My Profile
+                </a>
+
+                <a href="{% url 'my_courses' %}">
+                    My Courses
+                </a>
+
+                <a href="{% url 'payment_history' %}">
+                    Payment History
+                </a>
+
+                <a href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Copyright -->
+
+        <div class="footer-bottom">
+
+            © 2026 EduLearn.
+            All rights reserved.
+
+        </div>
+
+
+    </footer>
+
+
+
+</body>
+
+</html>

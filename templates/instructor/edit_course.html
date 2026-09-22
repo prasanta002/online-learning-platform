@@ -1,0 +1,334 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Course | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/edit_course.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-inner">
+
+            <a
+                href="{% url 'home' %}"
+                class="brand"
+            >
+                🎓 EduLearn
+            </a>
+
+            <div class="nav-right">
+
+                <span class="officer-label">
+                    Officer
+                </span>
+
+                <a
+                    href="{% url 'instructor_dashboard' %}"
+                    class="dashboard-link"
+                >
+                    Dashboard
+                </a>
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-link"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN PAGE
+    ========================= -->
+
+    <main class="edit-page">
+
+        <div class="page-header">
+
+            <span class="page-label">
+                COURSE MANAGEMENT
+            </span>
+
+            <h1>
+                Edit Course
+            </h1>
+
+            <p>
+                Update your course information and settings.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             FORM CARD
+        ========================= -->
+
+        <section class="edit-card">
+
+            <div class="card-header">
+
+                <div class="course-icon">
+                    📚
+                </div>
+
+                <div>
+
+                    <h2>
+                        Course Information
+                    </h2>
+
+                    <p>
+                        Update the details of your course below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+
+                <!-- COURSE TITLE -->
+
+                <div class="form-group">
+
+                    <label for="course-title">
+                        Course Title
+                    </label>
+
+                    <input
+                        id="course-title"
+                        type="text"
+                        name="title"
+                        value="{{ course.title }}"
+                        placeholder="Enter course title"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CATEGORY -->
+
+                <div class="form-group">
+
+                    <label for="course-category">
+                        Category
+                    </label>
+
+                    <select
+                        id="course-category"
+                        name="category"
+                        required
+                    >
+
+                        {% for category in categories %}
+
+                            <option
+                                value="{{ category.id }}"
+                                {% if course.category.id == category.id %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ category.name }}
+                            </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="course-description">
+                        Course Description
+                    </label>
+
+                    <textarea
+                        id="course-description"
+                        name="description"
+                        rows="7"
+                        placeholder="Enter course description"
+                        required
+                    >{{ course.description }}</textarea>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="form-group">
+
+                    <label for="course-price">
+                        Course Price
+                    </label>
+
+                    <div class="price-input">
+
+                        <span>
+                            ₹
+                        </span>
+
+                        <input
+                            id="course-price"
+                            type="number"
+                            name="price"
+                            value="{{ course.price }}"
+                            step="0.01"
+                            min="0"
+                            placeholder="0.00"
+                            required
+                        >
+
+                    </div>
+
+                    <small>
+                        Set the price to 0 for a free course.
+                    </small>
+
+                </div>
+
+
+                <!-- PUBLISH OPTION -->
+
+                <div class="publish-box">
+
+                    <div class="publish-text">
+
+                        <strong>
+                            Publish this course
+                        </strong>
+
+                        <span>
+                            Make this course visible to students.
+                        </span>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            name="is_published"
+                            {% if course.is_published %}
+                                checked
+                            {% endif %}
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{% url 'instructor_dashboard' %}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="update-button"
+                    >
+                        ✏️ Update Course
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- TIP -->
+
+        <div class="tip-box">
+
+            <span class="tip-icon">
+                💡
+            </span>
+
+            <div>
+
+                <strong>
+                    Course Management Tip
+                </strong>
+
+                <p>
+                    Make sure your course information is clear
+                    and accurate before publishing it for students.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="{% url 'instructor_dashboard' %}"
+            class="back-link"
+        >
+            ← Back to Instructor Dashboard
+        </a>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </footer>
+
+
+</body>
+
+</html>

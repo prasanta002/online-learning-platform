@@ -1,0 +1,229 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Certificate of Completion | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/certificate.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         CERTIFICATE PAGE
+    ========================= -->
+
+    <main class="certificate-page">
+
+
+        <!-- =========================
+             CERTIFICATE
+        ========================= -->
+
+        <section class="certificate">
+
+
+            <!-- Decorative corners -->
+
+            <div class="corner corner-top-left"></div>
+            <div class="corner corner-top-right"></div>
+            <div class="corner corner-bottom-left"></div>
+            <div class="corner corner-bottom-right"></div>
+
+
+            <!-- PLATFORM -->
+
+            <div class="platform-name">
+                🎓 EDULEARN
+            </div>
+
+
+            <div class="platform-tagline">
+                ONLINE LEARNING PLATFORM
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1 class="certificate-title">
+                Certificate of Completion
+            </h1>
+
+
+            <div class="title-line">
+                <span></span>
+                <div>✦</div>
+                <span></span>
+            </div>
+
+
+            <!-- PRESENTED TEXT -->
+
+            <p class="presented-text">
+                This certificate is proudly presented to
+            </p>
+
+
+            <!-- STUDENT -->
+
+            <h2 class="student-name">
+
+                {{ certificate.student.get_full_name|default:certificate.student.username }}
+
+            </h2>
+
+
+            <!-- COMPLETION -->
+
+            <p class="completion-text">
+                for successfully completing the course
+            </p>
+
+
+            <!-- COURSE -->
+
+            <div class="course-name">
+
+                {{ certificate.course.title }}
+
+            </div>
+
+
+            <p class="achievement-text">
+
+                demonstrating dedication and commitment
+                to learning and completing the course.
+
+            </p>
+
+
+            <!-- DETAILS -->
+
+            <div class="details">
+
+
+                <!-- INSTRUCTOR -->
+
+                <div class="detail-box">
+
+                    <div class="detail-line"></div>
+
+                    <strong>
+                        Instructor
+                    </strong>
+
+                    <span>
+                        {{ certificate.course.instructor.username }}
+                    </span>
+
+                </div>
+
+
+                <!-- ISSUE DATE -->
+
+                <div class="detail-box">
+
+                    <div class="detail-line"></div>
+
+                    <strong>
+                        Issue Date
+                    </strong>
+
+                    <span>
+                        {{ certificate.issued_at|date:"F d, Y" }}
+                    </span>
+
+                </div>
+
+
+                <!-- CERTIFICATE ID -->
+
+                <div class="detail-box">
+
+                    <div class="detail-line"></div>
+
+                    <strong>
+                        Certificate ID
+                    </strong>
+
+                    <span>
+                        {{ certificate.certificate_id }}
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- FOOTER -->
+
+            <div class="certificate-footer">
+
+                <div class="verified-badge">
+
+                    ✓
+
+                    <span>
+                        Certificate of Achievement
+                    </span>
+
+                </div>
+
+
+                <div class="footer-brand">
+                    EduLearn
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =========================
+             ACTIONS
+        ========================= -->
+
+        <div class="certificate-actions">
+
+            <button
+                type="button"
+                class="print-button"
+                onclick="window.print()"
+            >
+                🖨️ Print Certificate
+            </button>
+
+
+            <a
+                href="{% url 'my_courses' %}"
+                class="back-button"
+            >
+                ← Back to My Courses
+            </a>
+
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>

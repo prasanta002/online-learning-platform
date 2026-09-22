@@ -1,0 +1,603 @@
+/* =========================================
+   EduLearn - Student Progress
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+
+/* =========================================
+   Navbar
+   ========================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 70px;
+
+    padding: 0 7%;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5e7eb;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #2563eb;
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #374151;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+
+/* =========================================
+   Main Page
+   ========================================= */
+
+.progress-page {
+    width: 86%;
+    max-width: 1400px;
+
+    margin: 0 auto;
+
+    padding: 45px 0 60px;
+}
+
+
+/* =========================================
+   Page Header
+   ========================================= */
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.page-label {
+    color: #2563eb;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 8px;
+}
+
+.page-header h1 {
+    color: #111827;
+
+    font-size: 36px;
+
+    margin-bottom: 8px;
+}
+
+.page-header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.progress-icon {
+    width: 75px;
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 20px;
+
+    font-size: 35px;
+}
+
+
+/* =========================================
+   Summary
+   ========================================= */
+
+.summary-card {
+    width: 280px;
+
+    padding: 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.summary-icon {
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 12px;
+
+    font-size: 24px;
+}
+
+.summary-card span {
+    display: block;
+
+    color: #6b7280;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.summary-card strong {
+    display: block;
+
+    color: #111827;
+
+    font-size: 25px;
+}
+
+
+/* =========================================
+   Progress Card
+   ========================================= */
+
+.progress-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+    padding: 25px 28px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.card-header h2 {
+    color: #111827;
+
+    font-size: 21px;
+
+    margin-bottom: 5px;
+}
+
+.card-header p {
+    color: #6b7280;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   Table
+   ========================================= */
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    min-width: 1000px;
+
+    border-collapse: collapse;
+}
+
+thead {
+    background: #f9fafb;
+}
+
+th {
+    padding: 16px 20px;
+
+    text-align: left;
+
+    color: #6b7280;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+    padding: 18px 20px;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    border-bottom: 1px solid #f0f1f3;
+}
+
+tbody tr {
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================
+   Student
+   ========================================= */
+
+.student-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.student-avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 16px;
+}
+
+.student-info strong {
+    color: #111827;
+}
+
+
+/* =========================================
+   Email
+   ========================================= */
+
+.email {
+    color: #6b7280;
+}
+
+
+/* =========================================
+   Course
+   ========================================= */
+
+.course-name {
+    color: #374151;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   Lessons
+   ========================================= */
+
+.lesson-count {
+    display: flex;
+    align-items: baseline;
+    gap: 3px;
+}
+
+.lesson-count strong {
+    color: #111827;
+
+    font-size: 16px;
+}
+
+.lesson-count span {
+    color: #6b7280;
+}
+
+td small {
+    display: block;
+
+    margin-top: 4px;
+
+    color: #9ca3af;
+
+    font-size: 11px;
+}
+
+
+/* =========================================
+   Progress
+   ========================================= */
+
+.progress-info {
+    margin-bottom: 8px;
+}
+
+.progress-percentage {
+    color: #2563eb;
+
+    font-size: 15px;
+
+    font-weight: 800;
+}
+
+.progress-bar {
+    width: 180px;
+    height: 8px;
+
+    background: #e5e7eb;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0;
+
+    height: 100%;
+
+    background: #2563eb;
+
+    border-radius: 999px;
+
+    transition: width 0.8s ease;
+}
+
+
+/* =========================================
+   Empty State
+   ========================================= */
+
+.empty-state {
+    padding: 70px 25px;
+
+    text-align: center;
+}
+
+.empty-icon {
+    width: 75px;
+    height: 75px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eff6ff;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+}
+
+.empty-state h3 {
+    color: #111827;
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    color: #6b7280;
+
+    max-width: 450px;
+
+    margin: 0 auto;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   Back Button
+   ========================================= */
+
+.page-actions {
+    margin-top: 25px;
+}
+
+.back-button {
+    display: inline-block;
+
+    padding: 12px 20px;
+
+    background: #ffffff;
+
+    border: 1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.back-button:hover {
+    background: #2563eb;
+
+    border-color: #2563eb;
+
+    color: #ffffff;
+}
+
+
+/* =========================================
+   Footer
+   ========================================= */
+
+.footer {
+    padding: 25px;
+
+    text-align: center;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    border-top: 1px solid #e5e7eb;
+
+    background: #ffffff;
+}
+
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .progress-page {
+        width: 92%;
+
+        padding-top: 30px;
+    }
+
+    .page-header {
+        align-items: flex-start;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .progress-icon {
+        width: 60px;
+        height: 60px;
+
+        font-size: 28px;
+    }
+
+    .summary-card {
+        width: 100%;
+    }
+
+    .card-header {
+        padding: 20px;
+    }
+
+    th,
+    td {
+        padding: 14px;
+    }
+}
+
+
+/* =========================================
+   Small Mobile
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        min-height: 65px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+
+    .nav-links {
+        gap: 10px;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .progress-icon {
+        display: none;
+    }
+}

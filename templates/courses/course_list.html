@@ -1,0 +1,645 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Courses | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/course.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+<!-- ==============================
+     NAVBAR
+================================= -->
+
+<nav class="navbar">
+
+    <div class="navbar-container">
+
+
+        <!-- =========================
+             LOGO
+        ========================== -->
+
+        <a
+            href="{% url 'home' %}"
+            class="logo"
+        >
+            🎓 EduLearn
+        </a>
+
+
+        {% if user.is_authenticated %}
+
+
+            <!-- =========================
+                 LOGGED-IN NAVBAR
+            ========================== -->
+
+            <div class="nav-links">
+
+                <a href="{% url 'dashboard' %}">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'profile' %}">
+                    Profile
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'logout' %}"
+                    class="logout-button"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+
+        {% else %}
+
+
+            <!-- =========================
+                 LOGGED-OUT NAVBAR
+            ========================== -->
+
+            <div class="nav-links">
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+
+            <div class="nav-actions">
+
+                <a
+                    href="{% url 'login' %}"
+                    class="login-link"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="register-link"
+                >
+                    Register
+                </a>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+     PAGE HEADER
+========================= -->
+
+<section class="course-hero">
+
+    <div class="course-hero-content">
+
+        <span class="hero-label">
+            LEARN SOMETHING NEW
+        </span>
+
+        <h1>
+            Explore Our Courses
+        </h1>
+
+        <p>
+            Learn practical skills through structured
+            courses and video lessons.
+        </p>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     COURSE CONTENT
+========================= -->
+
+<main class="course-container">
+
+
+    <!-- =========================
+         SEARCH
+    ========================= -->
+
+    <section class="search-section">
+
+        <form
+            method="GET"
+            class="search-form"
+        >
+
+            <div class="search-input">
+
+                <span>
+                    🔍
+                </span>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Search courses..."
+                    value="{{ search_query }}"
+                >
+
+            </div>
+
+
+            <select name="category">
+
+                <option value="">
+                    All Categories
+                </option>
+
+                {% for category in categories %}
+
+                    <option
+                        value="{{ category.id }}"
+                        {% if selected_category == category.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+
+                        {{ category.name }}
+
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <select name="sort">
+
+                <option
+                    value="newest"
+                    {% if selected_sort == "newest" %}
+                        selected
+                    {% endif %}
+                >
+                    Newest
+                </option>
+
+
+                <option
+                    value="oldest"
+                    {% if selected_sort == "oldest" %}
+                        selected
+                    {% endif %}
+                >
+                    Oldest
+                </option>
+
+
+                <option
+                    value="price_low"
+                    {% if selected_sort == "price_low" %}
+                        selected
+                    {% endif %}
+                >
+                    Price: Low → High
+                </option>
+
+
+                <option
+                    value="price_high"
+                    {% if selected_sort == "price_high" %}
+                        selected
+                    {% endif %}
+                >
+                    Price: High → Low
+                </option>
+
+            </select>
+
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </section>
+
+
+
+    <!-- =========================
+         CATEGORY FILTERS
+    ========================= -->
+
+    <section class="category-section">
+
+        <div class="category-header">
+
+            <h3>
+                Browse Categories
+            </h3>
+
+        </div>
+
+
+        <div class="category-list">
+
+            <a
+                href="{% url 'course_list' %}"
+                class="category-chip
+                {% if not selected_category %}
+                    selected
+                {% endif %}"
+            >
+                All
+            </a>
+
+
+            {% for category in categories %}
+
+                <a
+                    href="?category={{ category.id }}"
+                    class="category-chip
+                    {% if selected_category == category.id|stringformat:'s' %}
+                        selected
+                    {% endif %}"
+                >
+
+                    {{ category.name }}
+
+                </a>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         COURSE HEADER
+    ========================= -->
+
+    <div class="courses-heading">
+
+        <div>
+
+            <span>
+                AVAILABLE COURSES
+            </span>
+
+            <h2>
+                Find Your Next Course
+            </h2>
+
+        </div>
+
+
+        <div class="course-count">
+
+            {{ courses|length }}
+
+            course{{ courses|length|pluralize }}
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         COURSE GRID
+    ========================= -->
+
+    <section class="course-grid">
+
+
+        {% for course in courses %}
+
+
+            <article class="course-card">
+
+
+                <!-- Course Icon -->
+
+                <div class="course-image">
+
+                    <div class="course-icon">
+                        🎓
+                    </div>
+
+
+                    {% if course.price == 0 %}
+
+                        <span class="course-badge free">
+                            FREE
+                        </span>
+
+                    {% else %}
+
+                        <span class="course-badge paid">
+                            PAID
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Course Content -->
+
+                <div class="course-content">
+
+
+                    {% if course.category %}
+
+                        <span class="course-category">
+
+                            {{ course.category.name }}
+
+                        </span>
+
+                    {% endif %}
+
+
+                    <h2>
+
+                        <a
+                            href="{% url 'course_detail' course.id %}"
+                        >
+
+                            {{ course.title }}
+
+                        </a>
+
+                    </h2>
+
+
+                    <p class="course-description">
+
+                        {{ course.description|truncatewords:22 }}
+
+                    </p>
+
+
+                    <div class="course-details">
+
+                        <span>
+                            👨‍🏫 {{ course.instructor.username }}
+                        </span>
+
+                        <span>
+                            🎥 {{ course.lessons.count }} Lessons
+                        </span>
+
+                    </div>
+
+
+                    <div class="course-footer">
+
+
+                        {% if course.price == 0 %}
+
+                            <div class="price free-price">
+                                Free
+                            </div>
+
+                        {% else %}
+
+                            <div class="price">
+                                ₹{{ course.price }}
+                            </div>
+
+                        {% endif %}
+
+
+
+                        {% if user.is_authenticated %}
+
+                            <a
+                                href="{% url 'course_detail' course.id %}"
+                                class="view-course-button"
+                            >
+
+                                View Course →
+
+                            </a>
+
+                        {% else %}
+
+                            <a
+                                href="{% url 'login' %}"
+                                class="view-course-button"
+                            >
+
+                                Login to Enroll →
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        {% empty %}
+
+
+            <!-- =========================
+                 NO COURSES
+            ========================= -->
+
+            <div class="no-courses">
+
+                <div class="no-course-icon">
+                    🔍
+                </div>
+
+                <h2>
+                    No Courses Found
+                </h2>
+
+                <p>
+                    We couldn't find any courses matching
+                    your search.
+                </p>
+
+                <a
+                    href="{% url 'course_list' %}"
+                    class="primary-button"
+                >
+                    View All Courses
+                </a>
+
+            </div>
+
+
+        {% endfor %}
+
+
+    </section>
+
+</main>
+
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section class="course-cta">
+
+    <div>
+
+        <h2>
+            Start Learning Today
+        </h2>
+
+        <p>
+            Choose a course and take the next step
+            toward your goals.
+        </p>
+
+        <a
+            href="{% url 'register' %}"
+            class="cta-button"
+        >
+            Create Free Account →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div>
+
+            <div class="footer-logo">
+                🎓 EduLearn
+            </div>
+
+            <p>
+                Learn. Grow. Succeed.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Platform
+            </h4>
+
+            <a href="{% url 'home' %}">
+                Home
+            </a>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="{% url 'free_courses' %}">
+                Free Courses
+            </a>
+
+            <a href="{% url 'paid_courses' %}">
+                Paid Courses
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Account
+            </h4>
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

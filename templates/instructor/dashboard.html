@@ -1,0 +1,758 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Officer Dashboard | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/instructor.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- =========================
+         NAVBAR
+    ========================= -->
+
+    <header class="navbar">
+
+        <div class="nav-container">
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            <div class="nav-user">
+
+                <div class="user-info">
+
+                    <span class="user-label">
+                        OFFICER
+                    </span>
+
+                    <strong>
+                        {{ user.username }}
+                    </strong>
+
+                </div>
+
+
+                <a
+                    href="{% url 'officer_logout' %}"
+                    class="logout-button"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="dashboard-container">
+
+
+        <!-- =========================
+             HEADER
+        ========================= -->
+
+        <section class="dashboard-header">
+
+            <div class="header-content">
+
+                <span class="page-label">
+                    OFFICER DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome, {{ user.username }}!
+                </h1>
+
+                <p>
+                    Manage your courses, lessons, students,
+                    and payments from one place.
+                </p>
+
+            </div>
+
+
+            <div class="header-actions">
+
+                <a
+                    href="{% url 'instructor_create_course' %}"
+                    class="primary-button"
+                >
+                    + Add New Course
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MANAGEMENT ACTIONS
+        ========================= -->
+
+        <section class="management-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Management
+                    </h2>
+
+                    <p>
+                        Access your platform management tools.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="management-grid">
+
+
+                <!-- STUDENTS -->
+
+                <a
+                    href="{% url 'instructor_students' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon">
+                        👨‍🎓
+                    </div>
+
+                    <div class="management-content">
+
+                        <h3>
+                            Student Management
+                        </h3>
+
+                        <p>
+                            View enrolled students and
+                            enrollment information.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- PROGRESS -->
+
+                <a
+                    href="{% url 'instructor_student_progress' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon progress-icon">
+                        📊
+                    </div>
+
+                    <div class="management-content">
+
+                        <h3>
+                            Student Progress
+                        </h3>
+
+                        <p>
+                            Track student learning progress
+                            across your courses.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+                <!-- PAYMENTS -->
+
+                <a
+                    href="{% url 'instructor_payments' %}"
+                    class="management-card"
+                >
+
+                    <div class="management-icon payment-icon">
+                        💳
+                    </div>
+
+                    <div class="management-content">
+
+                        <h3>
+                            Payment Management
+                        </h3>
+
+                        <p>
+                            View course payments and
+                            transaction details.
+                        </p>
+
+                    </div>
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             STATISTICS
+        ========================= -->
+
+        <section class="stats-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Dashboard Overview
+                    </h2>
+
+                    <p>
+                        A quick overview of your platform.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+
+                <!-- COURSES -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📚
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Courses
+                        </span>
+
+                        <strong>
+                            {{ total_courses }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSONS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        🎥
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Lessons
+                        </span>
+
+                        <strong>
+                            {{ total_lessons }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- STUDENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        👨‍🎓
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Students
+                        </span>
+
+                        <strong>
+                            {{ total_students }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ENROLLMENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total Enrollments
+                        </span>
+
+                        <strong>
+                            {{ total_enrollments }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MY COURSES
+        ========================= -->
+
+        <section class="courses-section">
+
+
+            <div class="section-heading course-heading">
+
+                <div>
+
+                    <h2>
+                        My Courses
+                    </h2>
+
+                    <p>
+                        Manage your courses and lessons.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{% url 'instructor_create_course' %}"
+                    class="outline-button"
+                >
+                    + Add Course
+                </a>
+
+            </div>
+
+
+            {% if courses %}
+
+
+                <div class="course-list">
+
+
+                    {% for course in courses %}
+
+
+                        <article class="course-card">
+
+
+                            <!-- COURSE HEADER -->
+
+                            <div class="course-card-header">
+
+                                <div class="course-icon">
+                                    📚
+                                </div>
+
+
+                                <div class="course-title-area">
+
+                                    <h3>
+                                        {{ course.title }}
+                                    </h3>
+
+                                    <span class="course-price">
+
+                                        {% if course.price == 0 %}
+                                            Free Course
+                                        {% else %}
+                                            ₹{{ course.price }}
+                                        {% endif %}
+
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DESCRIPTION -->
+
+                            <p class="course-description">
+
+                                {{ course.description }}
+
+                            </p>
+
+
+                            <!-- COURSE ACTIONS -->
+
+                            <div class="course-actions">
+
+
+                                <a
+                                    href="{% url 'course_detail' course.id %}"
+                                    class="course-button view"
+                                >
+                                    👁️ View
+                                </a>
+
+
+                                <a
+                                    href="{% url 'instructor_edit_course' course.id %}"
+                                    class="course-button edit"
+                                >
+                                    ✏️ Edit
+                                </a>
+
+
+                                <a
+                                    href="{% url 'instructor_delete_course' course.id %}"
+                                    class="course-button delete"
+                                >
+                                    🗑️ Delete
+                                </a>
+
+
+                                <a
+                                    href="{% url 'instructor_create_lesson' course.id %}"
+                                    class="course-button lesson"
+                                >
+                                    🎥 Add Lesson
+                                </a>
+
+
+                            </div>
+
+
+                            <!-- =========================
+                                 LESSONS
+                            ========================= -->
+
+                            <div class="lesson-section">
+
+
+                                <div class="lesson-header">
+
+                                    <h4>
+                                        Course Lessons
+                                    </h4>
+
+                                    <span>
+                                        {{ course.lessons.count }}
+                                        Lesson{{ course.lessons.count|pluralize }}
+                                    </span>
+
+                                </div>
+
+
+                                {% for lesson in course.lessons.all %}
+
+
+                                    <div class="lesson-item">
+
+
+                                        <div class="lesson-info">
+
+                                            <span class="lesson-number">
+                                                {{ lesson.order }}
+                                            </span>
+
+                                            <span class="lesson-title">
+                                                {{ lesson.title }}
+                                            </span>
+
+                                        </div>
+
+
+                                        <div class="lesson-actions">
+
+
+                                            <a
+                                                href="{% url 'instructor_edit_lesson' lesson.id %}"
+                                                class="lesson-edit"
+                                            >
+                                                ✏️ Edit
+                                            </a>
+
+
+                                            <a
+                                                href="{% url 'instructor_delete_lesson' lesson.id %}"
+                                                class="lesson-delete"
+                                            >
+                                                🗑️ Delete
+                                            </a>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+                                {% empty %}
+
+
+                                    <div class="no-lessons">
+
+                                        <span>
+                                            🎥
+                                        </span>
+
+                                        <p>
+                                            No lessons added yet.
+                                        </p>
+
+                                        <a
+                                            href="{% url 'instructor_create_lesson' course.id %}"
+                                        >
+                                            Add your first lesson
+                                        </a>
+
+                                    </div>
+
+
+                                {% endfor %}
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- EMPTY COURSE STATE -->
+
+                <div class="empty-courses">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        No Courses Yet
+                    </h3>
+
+                    <p>
+                        You haven't created any courses yet.
+                        Start by creating your first course.
+                    </p>
+
+                    <a
+                        href="{% url 'instructor_create_course' %}"
+                        class="primary-button"
+                    >
+                        + Create Your First Course
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- =========================
+             QUICK LINKS
+        ========================= -->
+
+        <section class="quick-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2>
+                        Quick Links
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="quick-links">
+
+
+                <a
+                    href="{% url 'course_list' %}"
+                    class="quick-link"
+                >
+                    📚
+                    <span>
+                        View All Courses
+                    </span>
+                    →
+                </a>
+
+
+                <a
+                    href="{% url 'dashboard' %}"
+                    class="quick-link"
+                >
+                    👨‍🎓
+                    <span>
+                        Student Dashboard
+                    </span>
+                    →
+                </a>
+
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <div class="footer-brand">
+
+                <div class="footer-logo">
+                    🎓 EduLearn
+                </div>
+
+                <p>
+                    Learn. Grow. Succeed.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Officer
+                </h4>
+
+                <a href="{% url 'instructor_students' %}">
+                    Student Management
+                </a>
+
+                <a href="{% url 'instructor_student_progress' %}">
+                    Student Progress
+                </a>
+
+                <a href="{% url 'instructor_payments' %}">
+                    Payment Management
+                </a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>
+                    Platform
+                </h4>
+
+                <a href="{% url 'course_list' %}">
+                    View Courses
+                </a>
+
+                <a href="{% url 'dashboard' %}">
+                    Student Dashboard
+                </a>
+
+                <a href="{% url 'officer_logout' %}">
+                    Officer Logout
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 EduLearn.
+            All rights reserved.
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>

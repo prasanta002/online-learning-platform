@@ -1,0 +1,622 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EduLearn | Learn. Grow. Succeed.</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/home.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+<!-- ========================= -->
+<!-- NAVBAR -->
+<!-- ========================= -->
+
+<header class="navbar">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+            🎓 EduLearn
+        </a>
+
+
+        <nav class="nav-links">
+
+            <a href="/" class="active">
+                Home
+            </a>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+            <a href="#features">
+                Features
+            </a>
+
+        </nav>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="{% url 'login' %}"
+                class="login-link"
+            >
+                Login
+            </a>
+
+            <a
+                href="{% url 'register' %}"
+                class="register-button"
+            >
+                Register
+            </a>
+
+            <a href="{% url 'officer_login' %}" class="admin-login-button">
+                Admin Login
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- ========================= -->
+<!-- HERO SECTION -->
+<!-- ========================= -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+
+        <!-- LEFT SIDE -->
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                🚀 Start Learning Today
+            </div>
+
+
+            <h1>
+                Learn New Skills.
+                <span>
+                    Build Your Future.
+                </span>
+            </h1>
+
+
+            <p>
+
+                Learn practical skills from structured
+                courses, watch lessons at your own pace,
+                and build a better future with knowledge.
+
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a
+                    href="{% url 'course_list' %}"
+                    class="primary-button"
+                >
+                    Explore Courses →
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="secondary-button"
+                >
+                    Create Free Account
+                </a>
+
+            </div>
+
+
+            <div class="hero-stats">
+
+                <div>
+
+                    <strong>
+                        100+
+                    </strong>
+
+                    <span>
+                        Lessons
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        10+
+                    </strong>
+
+                    <span>
+                        Courses
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        24/7
+                    </strong>
+
+                    <span>
+                        Learning
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="hero-visual">
+
+            <div class="learning-card">
+
+
+                <div class="card-top">
+
+                    <div class="course-icon">
+                        🐍
+                    </div>
+
+                    <span>
+                        Popular Course
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    Python Programming
+                </h3>
+
+
+                <p>
+                    Learn Python from the basics
+                    and build real projects.
+                </p>
+
+
+                <div class="progress-area">
+
+                    <div class="progress-info">
+
+                        <span>
+                            Course Progress
+                        </span>
+
+                        <strong>
+                            75%
+                        </strong>
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div class="progress">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="continue-learning">
+
+                    <span>
+                        🎥 Continue Learning
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card floating-one">
+
+                🎓
+
+                <div>
+
+                    <strong>
+                        Learn Anywhere
+                    </strong>
+
+                    <small>
+                        At your own pace
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="floating-card floating-two">
+
+                🏆
+
+                <div>
+
+                    <strong>
+                        Earn Certificates
+                    </strong>
+
+                    <small>
+                        Complete your courses
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- FEATURES -->
+<!-- ========================= -->
+
+<section
+    class="features"
+    id="features"
+>
+
+    <div class="section-header">
+
+        <span>
+            WHY CHOOSE US
+        </span>
+
+        <h2>
+            Everything You Need to Learn
+        </h2>
+
+        <p>
+            A simple platform designed to make
+            online learning easy and accessible.
+        </p>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📚
+            </div>
+
+            <h3>
+                Quality Courses
+            </h3>
+
+            <p>
+                Learn through structured courses
+                designed for practical learning.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🎥
+            </div>
+
+            <h3>
+                Video Lessons
+            </h3>
+
+            <p>
+                Watch lessons anytime and learn
+                at your own pace.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                📈
+            </div>
+
+            <h3>
+                Track Progress
+            </h3>
+
+            <p>
+                Keep track of completed lessons
+                and your course progress.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🏆
+            </div>
+
+            <h3>
+                Certificates
+            </h3>
+
+            <p>
+                Complete courses and receive
+                your learning certificate.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- ABOUT -->
+<!-- ========================= -->
+
+<section
+    class="about"
+    id="about"
+>
+
+    <div class="about-container">
+
+
+        <div class="about-content">
+
+            <span class="section-label">
+                ABOUT EDULEARN
+            </span>
+
+            <h2>
+                Learning Made
+                <span>
+                    Simple.
+                </span>
+            </h2>
+
+            <p>
+
+                EduLearn is an online learning platform
+                where students can discover courses,
+                watch lessons, track their progress,
+                and earn certificates.
+
+            </p>
+
+
+            <p>
+
+                Our goal is to make learning accessible,
+                simple, and practical for everyone.
+
+            </p>
+
+
+            <a
+                href="{% url 'course_list' %}"
+                class="primary-button"
+            >
+                Browse Courses →
+            </a>
+
+        </div>
+
+
+        <div class="about-box">
+
+            <div class="about-number">
+                01
+            </div>
+
+            <h3>
+                Learn
+            </h3>
+
+            <p>
+                Choose a course and start learning
+                through video lessons.
+            </p>
+
+
+            <div class="about-number">
+                02
+            </div>
+
+            <h3>
+                Practice
+            </h3>
+
+            <p>
+                Complete lessons and track your
+                learning progress.
+            </p>
+
+
+            <div class="about-number">
+                03
+            </div>
+
+            <h3>
+                Achieve
+            </h3>
+
+            <p>
+                Complete your course and earn
+                a certificate.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- CTA -->
+<!-- ========================= -->
+
+<section class="cta">
+
+    <div>
+
+        <h2>
+            Ready to Start Learning?
+        </h2>
+
+        <p>
+            Create your account and start your
+            learning journey today.
+        </p>
+
+        <a
+            href="{% url 'register' %}"
+            class="cta-button"
+        >
+            Get Started →
+        </a>
+
+    </div>
+
+</section>
+
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+
+        <div>
+
+            <div class="footer-logo">
+                🎓 EduLearn
+            </div>
+
+            <p>
+                Learn. Grow. Succeed.
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Platform
+            </h4>
+
+            <a href="{% url 'course_list' %}">
+                Courses
+            </a>
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+            <a href="{% url 'register' %}">
+                Register
+            </a>
+
+            
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h4>
+                Account
+            </h4>
+
+            <a href="{% url 'login' %}">
+                Student Login
+            </a>
+
+            <a href="{% url 'officer_login' %}">
+                Officer Login
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 EduLearn. All rights reserved.
+
+    </div>
+
+</footer>
+
+
+</body>
+
+</html>

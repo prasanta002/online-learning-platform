@@ -1,0 +1,470 @@
+/* =========================================
+   GLOBAL
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: #f6f9fc;
+
+    color: #102d4f;
+}
+
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.navbar {
+    width: 100%;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid #e5ebf2;
+}
+
+.navbar-inner {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding: 16px 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brand {
+    color: #102d4f;
+
+    text-decoration: none;
+
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+}
+
+.officer-label {
+    color: #718096;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dashboard-link {
+    color: #2f80ed;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dashboard-link:hover {
+    text-decoration: underline;
+}
+
+.logout-link {
+    padding: 8px 13px;
+
+    background: #fff2f2;
+
+    color: #d64545;
+
+    border: 1px solid #ffd9d9;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.logout-link:hover {
+    background: #ffe5e5;
+}
+
+
+/* =========================================
+   PAGE
+========================================= */
+
+.delete-page {
+    min-height: calc(100vh - 130px);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 20px;
+}
+
+
+/* =========================================
+   DELETE CARD
+========================================= */
+
+.delete-card {
+    width: 100%;
+    max-width: 520px;
+
+    padding: 38px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e9f1;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 40px rgba(16, 45, 79, 0.07);
+
+    text-align: center;
+}
+
+
+/* =========================================
+   DELETE ICON
+========================================= */
+
+.delete-icon {
+    width: 64px;
+    height: 64px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff1f1;
+
+    border: 1px solid #ffdada;
+
+    border-radius: 16px;
+
+    font-size: 28px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.page-label {
+    display: inline-block;
+
+    color: #d64545;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 7px;
+}
+
+.delete-card h1 {
+    color: #102d4f;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    margin-bottom: 8px;
+}
+
+.delete-subtitle {
+    color: #7d8b99;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   COURSE BOX
+========================================= */
+
+.course-box {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 16px;
+
+    margin-bottom: 17px;
+
+    background: #f8fbff;
+
+    border: 1px solid #dfe8f1;
+
+    border-radius: 10px;
+
+    text-align: left;
+}
+
+.course-box-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #edf5ff;
+
+    border-radius: 9px;
+
+    font-size: 18px;
+}
+
+.course-box span {
+    display: block;
+
+    color: #8a98a6;
+
+    font-size: 10px;
+
+    margin-bottom: 4px;
+}
+
+.course-box h2 {
+    color: #304a63;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   WARNING
+========================================= */
+
+.warning-box {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 15px;
+
+    margin-bottom: 27px;
+
+    background: #fff8e8;
+
+    border: 1px solid #f4dfad;
+
+    border-radius: 9px;
+
+    text-align: left;
+}
+
+.warning-icon {
+    font-size: 18px;
+
+    flex-shrink: 0;
+}
+
+.warning-box strong {
+    display: block;
+
+    color: #76591d;
+
+    font-size: 12px;
+
+    margin-bottom: 4px;
+}
+
+.warning-box p {
+    color: #8b7443;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   ACTIONS
+========================================= */
+
+.actions {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 11px;
+}
+
+.cancel-button,
+.delete-button {
+    min-height: 43px;
+
+    padding: 0 18px;
+
+    border-radius: 8px;
+
+    font-family: inherit;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.cancel-button {
+    background: #ffffff;
+
+    color: #667789;
+
+    border: 1px solid #d7e0e9;
+}
+
+.cancel-button:hover {
+    background: #f7f9fb;
+}
+
+.delete-button {
+    background: #d64545;
+
+    color: #ffffff;
+
+    border: 1px solid #d64545;
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+.delete-button:hover {
+    background: #bd3030;
+
+    transform: translateY(-1px);
+}
+
+.delete-button:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   BACK LINK
+========================================= */
+
+.back-link {
+    margin-top: 20px;
+
+    color: #2f80ed;
+
+    text-decoration: none;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    padding: 20px;
+
+    border-top: 1px solid #e5ebf2;
+
+    background: #ffffff;
+
+    color: #8996a5;
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .navbar-inner {
+        padding: 14px 17px;
+    }
+
+    .nav-right {
+        gap: 9px;
+    }
+
+    .officer-label {
+        display: none;
+    }
+
+    .dashboard-link {
+        font-size: 11px;
+    }
+
+    .logout-link {
+        padding: 7px 10px;
+    }
+
+    .delete-page {
+        padding: 35px 15px;
+    }
+
+    .delete-card {
+        padding: 28px 20px;
+    }
+
+    .delete-card h1 {
+        font-size: 25px;
+    }
+
+    .actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-button,
+    .delete-button {
+        width: 100%;
+    }
+
+}

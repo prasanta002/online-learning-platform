@@ -1,0 +1,459 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Paid Courses | EduLearn</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/paid_courses.css' %}"
+    >
+
+</head>
+
+<body>
+
+
+    <!-- ==============================
+         NAVBAR
+    ================================= -->
+
+    <nav class="navbar">
+
+        <div class="navbar-container">
+
+            <!-- Logo -->
+
+            <a
+                href="{% url 'home' %}"
+                class="logo"
+            >
+                🎓 EduLearn
+            </a>
+
+
+            {% if user.is_authenticated %}
+
+                <!-- Logged In Navigation -->
+
+                <div class="nav-links">
+
+                    <a href="{% url 'dashboard' %}">
+                        Dashboard
+                    </a>
+
+                    <a href="{% url 'profile' %}">
+                        Profile
+                    </a>
+
+                </div>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="{% url 'logout' %}"
+                        class="logout-button"
+                    >
+                        Logout
+                    </a>
+
+                </div>
+
+
+            {% else %}
+
+                <!-- Logged Out Navigation -->
+
+                <div class="nav-links">
+
+                    <a href="{% url 'home' %}">
+                        Home
+                    </a>
+
+                    <a href="{% url 'course_list' %}">
+                        Courses
+                    </a>
+
+                    <a href="{% url 'free_courses' %}">
+                        Free Courses
+                    </a>
+
+                    <a
+                        href="{% url 'paid_courses' %}"
+                        class="active"
+                    >
+                        Paid Courses
+                    </a>
+
+                </div>
+
+
+                <div class="nav-actions">
+
+                    <a
+                        href="{% url 'login' %}"
+                        class="login-link"
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="{% url 'register' %}"
+                        class="register-link"
+                    >
+                        Register
+                    </a>
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ==============================
+         HERO
+    ================================= -->
+
+    <section class="paid-hero">
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                💳 Premium Learning
+            </span>
+
+            <h1>
+                Paid Courses
+            </h1>
+
+            <p>
+                Invest in your skills with our premium courses.
+                Learn from structured lessons and build
+                valuable knowledge for your future.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         COURSES SECTION
+    ================================= -->
+
+    <main class="courses-section">
+
+        <div class="section-header">
+
+            <div>
+
+                <span class="section-label">
+                    PREMIUM COURSES
+                </span>
+
+                <h2>
+                    Explore Paid Courses
+                </h2>
+
+            </div>
+
+
+            <div class="course-count">
+
+                {{ courses|length }}
+
+                {% if courses|length == 1 %}
+
+                    Paid Course
+
+                {% else %}
+
+                    Paid Courses
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==============================
+             COURSE GRID
+        ================================= -->
+
+        <div class="course-grid">
+
+
+            {% for course in courses %}
+
+                <article class="course-card">
+
+
+                    <!-- Course Header -->
+
+                    <div class="course-image">
+
+                        <div class="course-icon">
+                            💳
+                        </div>
+
+                        <span class="paid-badge">
+                            PREMIUM
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Course Content -->
+
+                    <div class="course-content">
+
+
+                        <!-- Category -->
+
+                        <div class="course-category">
+
+                            🏷️
+
+                            {% if course.category %}
+
+                                {{ course.category.name }}
+
+                            {% else %}
+
+                                General
+
+                            {% endif %}
+
+                        </div>
+
+
+
+                        <!-- Title -->
+
+                        <h3>
+
+                            <a
+                                href="{% url 'course_detail' course.id %}"
+                            >
+                                {{ course.title }}
+                            </a>
+
+                        </h3>
+
+
+
+                        <!-- Description -->
+
+                        <p class="course-description">
+
+                            {{ course.description|truncatewords:22 }}
+
+                        </p>
+
+
+
+                        <!-- Course Information -->
+
+                        <div class="course-meta">
+
+                            <span>
+                                👨‍🏫
+                                {{ course.instructor.username }}
+                            </span>
+
+                            <span>
+                                📚
+                                {{ course.lessons.count }} Lessons
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Price -->
+
+                        <div class="course-price">
+
+                            <span class="price-label">
+                                Course Price
+                            </span>
+
+                            <span class="price">
+                                ₹{{ course.price }}
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- View Course -->
+
+                        <a
+                            href="{% url 'course_detail' course.id %}"
+                            class="view-course-button"
+                        >
+                            View Course
+
+                            <span>
+                                →
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </article>
+
+
+            {% empty %}
+
+
+                <!-- Empty State -->
+
+                <div class="no-courses">
+
+                    <div class="empty-icon">
+                        📚
+                    </div>
+
+                    <h2>
+                        No Paid Courses Available
+                    </h2>
+
+                    <p>
+                        Paid courses will appear here when
+                        they are available.
+                    </p>
+
+                    <a
+                        href="{% url 'course_list' %}"
+                        class="browse-button"
+                    >
+                        Browse All Courses →
+                    </a>
+
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ==============================
+         CTA
+    ================================= -->
+
+    <section class="paid-cta">
+
+        <div class="cta-content">
+
+            <h2>
+                Invest in Your Learning
+            </h2>
+
+            <p>
+                Choose a course, complete your enrollment,
+                and start learning today.
+            </p>
+
+            <a
+                href="{% url 'course_list' %}"
+                class="cta-button"
+            >
+                Explore All Courses →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==============================
+         FOOTER
+    ================================= -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <!-- Footer Brand -->
+
+            <div class="footer-brand">
+
+                <h3>
+                    🎓 EduLearn
+                </h3>
+
+                <p>
+                    Learn new skills. Build your future.
+                </p>
+
+            </div>
+
+
+            <!-- Footer Links -->
+
+            <div class="footer-links">
+
+                <a href="{% url 'home' %}">
+                    Home
+                </a>
+
+                <a href="{% url 'course_list' %}">
+                    Courses
+                </a>
+
+                <a href="{% url 'free_courses' %}">
+                    Free Courses
+                </a>
+
+                <a href="{% url 'paid_courses' %}">
+                    Paid Courses
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 EduLearn. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
