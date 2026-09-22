@@ -17,6 +17,7 @@ body {
     color: #172033;
     background: #ffffff;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 a {
@@ -94,6 +95,30 @@ a {
 
 .register-button:hover {
     background: #075dcc;
+}
+
+.admin-login-button {
+    display: inline-block;
+
+    padding: 10px 16px;
+
+    background: #102d4f;
+
+    color: #ffffff;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition: 0.2s;
+}
+
+.admin-login-button:hover {
+    background: #081b31;
 }
 
 
@@ -652,7 +677,7 @@ footer {
 
 
 /* =========================
-   RESPONSIVE
+   TABLET RESPONSIVE
 ========================= */
 
 @media (max-width: 950px) {
@@ -697,10 +722,33 @@ footer {
 }
 
 
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
 @media (max-width: 600px) {
 
+    /* ---------- NAVBAR ---------- */
+
     .nav-container {
-        padding: 15px;
+        width: 100%;
+        padding: 12px 15px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 20px;
+        flex: 1;
+        min-width: 0;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .nav-actions {
+        gap: 7px;
+        flex-shrink: 0;
     }
 
     .login-link {
@@ -708,27 +756,74 @@ footer {
     }
 
     .register-button {
-        padding: 9px 14px;
+        padding: 9px 12px;
+        font-size: 13px;
+        white-space: nowrap;
     }
+
+    .admin-login-button {
+        padding: 9px 11px;
+        font-size: 13px;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+
+
+    /* ---------- HERO ---------- */
 
     .hero {
         padding: 65px 18px;
     }
 
+    .hero-container {
+        gap: 35px;
+    }
+
     .hero-content h1 {
         font-size: 39px;
+        line-height: 1.12;
     }
 
     .hero-content > p {
         font-size: 16px;
     }
 
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .primary-button,
+    .secondary-button {
+        width: 100%;
+        text-align: center;
+    }
+
     .hero-stats {
         gap: 25px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-stats strong {
+        font-size: 23px;
+    }
+
+    .hero-stats span {
+        font-size: 13px;
+    }
+
+
+    /* ---------- HERO CARD ---------- */
+
+    .hero-visual {
+        min-height: auto;
+        margin-top: 10px;
     }
 
     .learning-card {
         width: 100%;
+        max-width: 390px;
         padding: 24px;
     }
 
@@ -736,13 +831,31 @@ footer {
         display: none;
     }
 
+
+    /* ---------- FEATURES ---------- */
+
+    .features {
+        padding: 70px 18px;
+    }
+
     .feature-grid {
         grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 25px;
+    }
+
+    .section-header {
+        margin-bottom: 35px;
     }
 
     .section-header h2 {
         font-size: 30px;
     }
+
+
+    /* ---------- ABOUT ---------- */
 
     .about {
         padding: 70px 18px;
@@ -752,36 +865,77 @@ footer {
         font-size: 34px;
     }
 
+    .about-box {
+        padding: 25px;
+    }
+
+
+    /* ---------- CTA ---------- */
+
+    .cta {
+        padding: 65px 18px;
+    }
+
     .cta h2 {
         font-size: 30px;
     }
+
+
+    /* ---------- FOOTER ---------- */
 
     .footer-container {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+
+    footer {
+        padding: 45px 18px 20px;
+    }
+
+    .footer-bottom {
+        margin-top: 35px;
+    }
 }
 
-.admin-login-button {
-    display: inline-block;
 
-    padding: 10px 16px;
+/* =========================
+   SMALL MOBILE
+========================= */
 
-    background: #102d4f;
+@media (max-width: 400px) {
 
-    color: #ffffff;
+    .nav-container {
+        padding: 10px 10px;
+        gap: 5px;
+    }
 
-    border-radius: 8px;
+    .logo {
+        font-size: 18px;
+    }
 
-    text-decoration: none;
+    .nav-actions {
+        gap: 5px;
+    }
 
-    font-size: 14px;
+    .register-button {
+        padding: 8px 9px;
+        font-size: 12px;
+    }
 
-    font-weight: 700;
+    .admin-login-button {
+        padding: 8px 9px;
+        font-size: 12px;
+    }
 
-    transition: 0.2s;
-}
+    .hero-content h1 {
+        font-size: 34px;
+    }
 
-.admin-login-button:hover {
-    background: #081b31;
+    .hero-stats {
+        gap: 18px;
+    }
+
+    .hero-stats strong {
+        font-size: 21px;
+    }
 }
